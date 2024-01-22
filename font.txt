@@ -1,0 +1,42 @@
+switch(FontReady){
+        case false:
+          
+            return( 
+            <AppLoading startAsync={LoadFontsAndRestoreToken} 
+            onFinish={()=>SetFontReady(true)}
+            
+            onError={() => {}}
+            />
+            )
+
+        case true:
+            return(
+
+                <Onboarding
+                pages={pages} 
+                titleStyles={styles.title}
+                imageContainerStyles={styles.imgContainer}
+                />
+            )
+    }
+
+
+
+
+
+
+
+
+
+    const [FontReady,SetFontReady]=useState(false)
+    const useFonts=async ()=>{
+        await Font.loadAsync({
+        // 'zeyada':Zeyada_400Regular,
+        'audiowide':require('@expo-google-fonts/audiowide/Audiowide_400Regular.ttf'),
+         })
+    }
+    
+
+    const LoadFontsAndRestoreToken = async () => {
+        await useFonts();
+      };
