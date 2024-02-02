@@ -4,9 +4,6 @@ import { getItem } from "../../utils/asyncStorage";
 
 
 
-auth_data=getItem('auth_data')
-console.log(auth_data)
-
 
 let State={
     refresh_token:'',
@@ -32,17 +29,26 @@ let State={
 export const AuthenticationSlice=createSlice({
     name:'auth',
     initialState:State,
+    // middleware: getDefaultMiddleware =>
+    // getDefaultMiddleware({
+    //   serializableCheck: false,
+    // }),
     reducers:{
-        Login:(state,action)=>{
+        Login:async (state,action)=>{
             
+           const auth_data=await getItem('auth_data')
+           const data=JSON.parse(auth_data)
+           console.log('AUTH DATA :',data)
+           console.log('AUTH DATA :',data.token.access)
             
-            state.refresh_token=action.payload.token.refresh
-            state.access_token=action.payload.token.refresh
-            state.status=true
+            state.auth.refresh_token=data.token.refresh
+            state.auth.access_token=data.token.access
+            state.auth.status=true
         
-            
-
         },
+
+
+        
         Logout:(state,action)=>{
             console.log('logged out')
         }

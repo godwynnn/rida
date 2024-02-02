@@ -30,3 +30,10 @@ export const removeValue = async (key) => {
   
    
   }
+
+  // export const getAllData=async ()=>{
+  //   const keys = await AsyncStorage.getAllKeys();
+  //   const data = await AsyncStorage.multiGet(keys);
+
+    
+  // }

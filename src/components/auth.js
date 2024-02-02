@@ -6,8 +6,17 @@ import img from '../../assets/auth.png'
 
 const {width,height}=Dimensions.get('window')
 
+import { getAllData } from "../../utils/asyncStorage";
+
+
+
 export const Authentication=({navigation})=>{
     // const navigation=useNavigation()
+
+
+    // const datas=getAllData()
+    // console.log(datas)
+
 
     function goToLogin(){
         navigation.navigate('login')

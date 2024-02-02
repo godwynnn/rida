@@ -6,6 +6,9 @@ import { AuthenticationReducer } from "../reducer/reducer"
 export const store=configureStore({
     reducer:{
         authreducer:AuthenticationReducer
-    }
+    },
+    middleware: getDefaultMiddleware =>getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 })
 // export default store

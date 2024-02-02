@@ -24,12 +24,14 @@ import { Text,
 import { AuthenticationAction } from "../reducer/reducer";
 import axios from "axios";
 import { ScrollView } from "react-native";
-import { secureSetItem } from "../../utils/secureStorage";  
-import { setItem } from "../../utils/asyncStorage";
+// import { secureSetItem } from "../../utils/secureStorage";  
+import { setItem,getItem } from "../../utils/asyncStorage";
+import { Url } from "../urls";
 
 
 const {height,width}=Dimensions.get('window')
 
+const urls=Url()
 
 export const LoginView=()=>{
 
@@ -56,9 +58,7 @@ export const LoginView=()=>{
         //     // console.log(values)
         // }).catch(error=> console.log(error))
 
-        
-
-        const res=await fetch('https://928e-197-211-53-5.ngrok-free.app/auth/login',{
+        const res=await fetch(urls.login,{
             method:'POST',
             headers: {
                 'content-type': 'application/json'
@@ -69,16 +69,19 @@ export const LoginView=()=>{
             console.log(`ERROR ${error}`)
         })
         const data=await res.json()
-        // console.log(data)
+        console.log(data)
+       
         if(data.success===true){
-            setItem('auth_data',data)
-            dispatch(AuthenticationAction.Login(data))
+            // console.log(JSON.stringify(data))
+            setItem('auth_data',JSON.stringify(data))
+            dispatch(AuthenticationAction.Login())
+            
         }else{
             console.log('failed login attempt')
         }
         
         
-        console.log(stored_data)
+        // console.log(stored_data)
 
     }
 
