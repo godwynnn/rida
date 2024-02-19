@@ -38,7 +38,6 @@ export const LoginView=()=>{
     const dispatch=useDispatch()
 
     let stored_data=useSelector((state)=>state.authreducer)
-    console.log(stored_data)
 
     const[showPass,setShowPass]=useState(true)
     const LoginValidationSchema=yup.object({
@@ -75,6 +74,8 @@ export const LoginView=()=>{
             // console.log(JSON.stringify(data))
             setItem('auth_data',JSON.stringify(data))
             dispatch(AuthenticationAction.Login())
+            console.log(`STORED_DATA: ${stored_data}`)
+
             
         }else{
             console.log('failed login attempt')
@@ -129,8 +130,7 @@ export const LoginView=()=>{
                                 icon="eye"
                                 onPress={() => setShowPass(!showPass)}
                                 // color='#1D1A38'
-                                />
-                                
+                                />      
                         }/>
                         {(errors.password && touched.password) &&
                             <Text style={styles.errorText}>{errors.password}</Text>

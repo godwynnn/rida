@@ -1,12 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React,{useContext,useRef,useEffect,useState} from "react";
-import { Text,View } from "react-native";
-import {OnboardingView} from "./components/onboarding"
-import {Authentication} from "./components/auth"
-import { LoginView } from "./components/login";
-import { SignupView } from "./components/signup";
+import { Text,View,KeyboardAvoidingView, Platform, } from "react-native";
+import {OnboardingView} from "./screens/onboarding"
+import {Authentication} from "./screens/auth"
+import { LoginView } from "./screens/login";
+import { SignupView } from "./screens/signup";
 import { getItem } from "../utils/asyncStorage";
-import IndexView from "./components";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+
+import IndexView from "./screens";
 
 
 
@@ -43,24 +46,43 @@ function Navigation(){
 
     
     if(ShowOnboarded){
-        return(
-        <stack.Navigator screenOptions={{headerShown:false}} initialRouteName="onboarding">
-                <stack.Screen component={OnboardingView} name="onboarding"/>
-                <stack.Screen component={Authentication} name="auth"/>
+        
 
-        </stack.Navigator>
-        )
-    }else{
-        return(
-            <stack.Navigator screenOptions={{headerShown:false}} initialRouteName="auth">
-                    {/* <stack.Screen component={OnboardingView} name="onboarding"/> */}
-                    <stack.Screen component={Authentication} name="auth"/>
-                    <stack.Screen component={LoginView} name="login"/>
-                    <stack.Screen component={SignupView} name="signup"/>
     
-            </stack.Navigator>
-            )
-    }
+                return(
+                    <KeyboardAvoidingView
+                    
+                    behavior={Platform.OS==='ios'?'padding':'padding'}
+                    style={{flex:1}}
+                    >
+                        <stack.Navigator screenOptions={{headerShown:false}} initialRouteName="onboarding">
+                                <stack.Screen component={OnboardingView} name="onboarding"/>
+                                <stack.Screen component={Authentication} name="auth"/>
+
+                        </stack.Navigator>
+                </KeyboardAvoidingView>
+                    )
+                }else{
+                    return(
+
+                    <KeyboardAvoidingView
+                    
+                    behavior={Platform.OS==='ios'?'padding':'height'}
+                    style={{flex:1}}
+                    
+                    >
+                        <stack.Navigator screenOptions={{headerShown:false}} initialRouteName="auth">
+                                {/* <stack.Screen component={OnboardingView} name="onboarding"/> */}
+                                <stack.Screen component={Authentication} name="auth"/>
+                                <stack.Screen component={LoginView} name="login"/>
+                                <stack.Screen component={SignupView} name="signup"/>
+                
+                        </stack.Navigator>
+
+                    </KeyboardAvoidingView>
+                        )
+        }
+       
 }
 
 

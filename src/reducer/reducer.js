@@ -40,15 +40,13 @@ export const AuthenticationSlice=createSlice({
            const data=JSON.parse(auth_data)
            console.log('AUTH DATA :',data)
            console.log('AUTH DATA :',data.token.access)
-            
+
             state.auth.refresh_token=data.token.refresh
             state.auth.access_token=data.token.access
             state.auth.status=true
         
         },
 
-
-        
         Logout:(state,action)=>{
             console.log('logged out')
         }
