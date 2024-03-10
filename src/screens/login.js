@@ -27,17 +27,21 @@ import { ScrollView } from "react-native";
 // import { secureSetItem } from "../../utils/secureStorage";  
 import { setItem,getItem } from "../../utils/asyncStorage";
 import { Url } from "../urls";
-
+import {ActivityIndicator,MD2Colors} from "react-native-paper";
+// import { useNavigation } from "@react-navigation/native";
 
 const {height,width}=Dimensions.get('window')
 
 const urls=Url()
 
-export const LoginView=()=>{
+export const LoginView=({navigation})=>{
 
     const dispatch=useDispatch()
+    
 
-    let stored_data=useSelector((state)=>state.authreducer)
+    
+    const [load,setloader]=useState(false)
+   
 
     const[showPass,setShowPass]=useState(true)
     const LoginValidationSchema=yup.object({
@@ -56,6 +60,7 @@ export const LoginView=()=>{
         //     console.log('yes')
         //     // console.log(values)
         // }).catch(error=> console.log(error))
+        setloader(true)
 
         const res=await fetch(urls.login,{
             method:'POST',
@@ -71,14 +76,24 @@ export const LoginView=()=>{
         console.log(data)
        
         if(data.success===true){
-            // console.log(JSON.stringify(data))
-            setItem('auth_data',JSON.stringify(data))
+            console.log(JSON.stringify(data))
+            setItem('auth_access_token',data.token.access)
+            setItem('auth_refresh_token',data.token.refresh)
             dispatch(AuthenticationAction.Login())
-            console.log(`STORED_DATA: ${stored_data}`)
+            
+            
+            
+            // const stored_data = await u_data
+            
+            // console.log(`STORED_DATA: ${stored_data}`)
+            setloader(false)
+            navigation.navigate('index')
+            
 
             
         }else{
             console.log('failed login attempt')
+            setloader(false)
         }
         
         
@@ -141,7 +156,12 @@ export const LoginView=()=>{
 
                         <TouchableOpacity style={[styles.btn]} onPress={handleSubmit}>
                             {/* <Button title="Login" style={[styles.login_btn]}  /> */}
+                          
+                            
                             <Text  style={[styles.login_btn]} >Login</Text>
+                          
+                           
+                            
                         </TouchableOpacity>
                         </>
                     )}
@@ -177,6 +197,8 @@ const styles=StyleSheet.create({
         width: width*0.6,
         height:width*0.15,
         backgroundColor:'#1D1A38',
+        display:'flex',
+        flexDirection:'row-reverse',
         alignSelf:'center',
         justifyContent:'center',
         alignItems:'center',

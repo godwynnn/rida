@@ -36,14 +36,17 @@ export const AuthenticationSlice=createSlice({
     reducers:{
         Login:async (state,action)=>{
             
-           const auth_data=await getItem('auth_data')
-           const data=JSON.parse(auth_data)
-           console.log('AUTH DATA :',data)
-           console.log('AUTH DATA :',data.token.access)
+           const auth_access_token=await getItem('auth_access_token')
+           const auth_refresh_token=await getItem('auth_refresh_token')
+        //    const data=JSON.parse(auth_data)
+        //    console.log('AUTH DATA :',auth_access_token)
+        //    console.log('AUTH DATA :',data.token.access)
 
-            state.auth.refresh_token=data.token.refresh
-            state.auth.access_token=data.token.access
-            state.auth.status=true
+            state.refresh_token=auth_refresh_token
+            state.access_token=auth_access_token
+            state.status=true
+            console.log('STATE', state)
+           
         
         },
 
@@ -54,6 +57,9 @@ export const AuthenticationSlice=createSlice({
     // reducers:AuthenticationReducer(state,action),
 })
 const {actions:AuthenticationAction,reducer:AuthenticationReducer}=AuthenticationSlice
+export const SelectAccessToken=(state)=>state.access_token
+export const SelectRefreshToken=(state)=>state.refresh_token
+export const SelectLoggedInStatus=(state)=>state.status
 
 export  {AuthenticationAction,AuthenticationReducer}
 

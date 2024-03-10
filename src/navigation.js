@@ -6,10 +6,11 @@ import {Authentication} from "./screens/auth"
 import { LoginView } from "./screens/login";
 import { SignupView } from "./screens/signup";
 import { getItem } from "../utils/asyncStorage";
+import IndexView from "./screens";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 
-import IndexView from "./screens";
+// import IndexView from "./screens";
 
 
 
@@ -76,6 +77,7 @@ function Navigation(){
                                 <stack.Screen component={Authentication} name="auth"/>
                                 <stack.Screen component={LoginView} name="login"/>
                                 <stack.Screen component={SignupView} name="signup"/>
+                                <stack.Screen component={IndexView} name="index"/>
                 
                         </stack.Navigator>
 
