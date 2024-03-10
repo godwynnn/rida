@@ -26,9 +26,9 @@ export default function IndexView() {
             <TextInput placeholder='Where are you going to?' style={tw`m-2 rounded-1 opacity-80 border-0`}/>
         </View>
 
-        <View>
+        
             <Events/>
-        </View>
+       
     </SafeAreaView>
   )
 }
