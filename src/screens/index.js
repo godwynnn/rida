@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { Text, View,StyleSheet,FlatList, SafeAreaView,StatusBar } from 'react-native'
+import { Text, View,StyleSheet, SafeAreaView,StatusBar,FlatList } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SelectAccessToken,SelectRefreshToken,SelectLoggedInStatus } from '../reducer/reducer'
 import tailwind from 'twrnc'
 import { TextInput } from 'react-native-paper'
 import Events from '../components/events'
+
 
 
 export default function IndexView() {
@@ -21,9 +22,9 @@ export default function IndexView() {
   
   return (
     <SafeAreaView style={styles.container}>
-        <View style={tw`bg-[#1D1A38] flex-0.45  justify-center p-2 `}>
-            <TextInput placeholder='Where are you going to?' style={tw`m-2 rounded-1 opacity-80 border-0`}/>
-            <TextInput placeholder='Where are you going to?' style={tw`m-2 rounded-1 opacity-80 border-0`}/>
+        <View style={tw`bg-[#1D1A38] flex-0.7  justify-center p-2 `}>
+            <TextInput placeholder='Where are you going to?' style={tw`m-2 rounded-1 opacity-90 border-0`}/>
+            <TextInput placeholder='Pick-up Point?' style={tw`m-2 rounded-1 opacity-90 border-0`}/>
         </View>
 
         

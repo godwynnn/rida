@@ -15,7 +15,7 @@ export const Authentication=({navigation})=>{
 
 
     // const datas=getAllData()
-    // console.log(datas)
+    
 
 
     function goToLogin(){

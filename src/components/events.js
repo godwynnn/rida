@@ -16,7 +16,11 @@ export default function Events() {
     screenOptions={{
         tabBarLabelStyle:{fontSize:6},
         tabBarStyle:{borderBottomWidth:0,elevation:0, backgroundColor:0},
-        tabBarActiveTintColor:"gray"
+        // tabBarActiveTintColor:"gray",
+        tabBarIndicatorStyle:{
+        backgroundColor:'gray',
+
+        }
     }}>
         <Tab.Screen name={'Today'} component={Today} />
         <Tab.Screen name='Tomorrow' component={Tomorrow} />
