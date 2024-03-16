@@ -14,7 +14,7 @@ export default function Events() {
     <Tab.Navigator initialRouteName='Today' 
     
     screenOptions={{
-        tabBarLabelStyle:{fontSize:6},
+        tabBarLabelStyle:{fontSize:8},
         tabBarStyle:{borderBottomWidth:0,elevation:0, backgroundColor:0},
         // tabBarActiveTintColor:"gray",
         tabBarIndicatorStyle:{
@@ -24,7 +24,7 @@ export default function Events() {
     }}>
         <Tab.Screen name={'Today'} component={Today} />
         <Tab.Screen name='Tomorrow' component={Tomorrow} />
-        <Tab.Screen name='22nd' component={NextTomorrow} />
+        {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
         <Tab.Screen name='Others' component={Others} />
     </Tab.Navigator>
   )

@@ -63,5 +63,26 @@ export const SelectLoggedInStatus=(state)=>state.status
 
 export  {AuthenticationAction,AuthenticationReducer}
 
-// export const {actions:}
+const LocationState={
+    'origin':null,
+    'destination':null,
+    'data':null
+}
+export const LocationSlice=createSlice({
+    name:'location',
+    initialState:LocationState,
+    reducers:{
+        setOrigin:(state,action)=>{
+            state.origin=action.payload
+        },
+        setDestination:(state,action)=>{
+            state.destination=action.payload
+        },
+        setTravelTimeData:(state,action)=>{
+            state.data=action.payload
+        }
+    }
+})
+const {actions:LocationAction,reducer:LocationReducer}=LocationSlice
+export {LocationAction,LocationReducer}
 

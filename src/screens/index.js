@@ -5,11 +5,13 @@ import { SelectAccessToken,SelectRefreshToken,SelectLoggedInStatus } from '../re
 import tailwind from 'twrnc'
 import { TextInput } from 'react-native-paper'
 import Events from '../components/events'
+import {GOOGLE_API_KEY} from '@env'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
 
 export default function IndexView() {
-  let u_data=useSelector((state)=>state.authreducer)
+  let u_data=useSelector(async (state)=>await state.authreducer)
   const stored_data= u_data
   console.log('STORED_DATA',stored_data)
   const tw=tailwind
@@ -22,9 +24,50 @@ export default function IndexView() {
   
   return (
     <SafeAreaView style={styles.container}>
-        <View style={tw`bg-[#1D1A38] flex-0.7  justify-center p-2 `}>
-            <TextInput placeholder='Where are you going to?' style={tw`m-2 rounded-1 opacity-90 border-0`}/>
-            <TextInput placeholder='Pick-up Point?' style={tw`m-2 rounded-1 opacity-90 border-0`}/>
+        <View style={tw`bg-[#120719] flex-0.7   p-2 `}>
+
+          <GooglePlacesAutocomplete
+          placeholder='Where are you going to?'
+          // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+          // currentLocationLabel="Current location"
+          nearbyPlacesAPI='GooglePlacesSearch'
+          listViewDisplayed={true}
+          styles={{
+            textInput:{fontSize:15},
+            container:{flex:0},
+            textInputContainer:{marginTop:50}
+          }}
+          minLength={1}
+          debounce={200} 
+          query={{
+            key: 'AIzaSyDHTQZbkXtFwsRLSnVYWAwbYe6GkVIvsHo',
+            language: 'en', 
+  
+          }}
+          />
+
+      <GooglePlacesAutocomplete
+                placeholder='Where are you going to?'
+                // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+                // currentLocationLabel="Current location"
+                nearbyPlacesAPI='GooglePlacesSearch'
+                listViewDisplayed={true}
+                styles={{
+                  textInput:{fontSize:15},
+                  container:{flex:1},
+                  textInputContainer:{marginTop:5,padding:1}
+                }}
+                minLength={1}a
+                debounce={200} 
+                fetchDetails={true}
+                query={{
+                  key: GOOGLE_API_KEY,
+                  language: 'en', 
+        
+                }}
+              
+                />
+       
         </View>
 
         
@@ -36,9 +79,10 @@ export default function IndexView() {
 
 styles=StyleSheet.create({
   container:{
-    // backgroundColor:'g',
+    backgroundColor:'white',
     flex:1,
     paddingTop: Platform.OS==='android'? StatusBar.currentHeight : '0',
+    justifyContent:'center',
 
 
   },
