@@ -15,6 +15,7 @@ export default function IndexView() {
   const stored_data= u_data
   console.log('STORED_DATA',stored_data)
   const tw=tailwind
+  // console.log(GOOGLE_API_KEY)
   
 
 
@@ -32,6 +33,8 @@ export default function IndexView() {
           // currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch'
           listViewDisplayed={true}
+          fetchDetails={true}
+
           styles={{
             textInput:{fontSize:15},
             container:{flex:0},
@@ -40,7 +43,7 @@ export default function IndexView() {
           minLength={1}
           debounce={200} 
           query={{
-            key: 'AIzaSyDHTQZbkXtFwsRLSnVYWAwbYe6GkVIvsHo',
+            key: GOOGLE_API_KEY,
             language: 'en', 
   
           }}
@@ -52,16 +55,17 @@ export default function IndexView() {
                 // currentLocationLabel="Current location"
                 nearbyPlacesAPI='GooglePlacesSearch'
                 listViewDisplayed={true}
+                fetchDetails={true}
                 styles={{
                   textInput:{fontSize:15},
                   container:{flex:1},
                   textInputContainer:{marginTop:5,padding:1}
                 }}
-                minLength={1}a
+                
+                minLength={1}
                 debounce={200} 
-                fetchDetails={true}
                 query={{
-                  key: GOOGLE_API_KEY,
+                  key: {GOOGLE_API_KEY},
                   language: 'en', 
         
                 }}
