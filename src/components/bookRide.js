@@ -6,7 +6,7 @@ import Cab from './rideComponents/cab'
 import Bike from './rideComponents/bike'
 
 const Tab =createMaterialTopTabNavigator()
-function bookRide() {
+function BookRide() {
 
 
   const tw = tailwind
@@ -37,4 +37,4 @@ function bookRide() {
   )
 }
 
-export default bookRide
+export default BookRide
