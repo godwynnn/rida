@@ -97,7 +97,7 @@ const styles=StyleSheet.create({
     height:width*0.9,
     paddingTop:'5%',
     justifyContent:'center',
-    flexWrap:'wrap',
+    // flexWrap:'wrap',
     alignContent:'flex-start',
     flexDirection:'row'
     

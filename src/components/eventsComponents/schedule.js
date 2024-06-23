@@ -51,9 +51,10 @@ export default function Schedule() {
 
       <RNPickerSelect
           onValueChange={(value) => console.log(value)}
-          style={[tw`w-[100%] h-10`, { fontSize: 5,  }]}
+          style={[tw`w-[100%] h-10`, { fontSize: 5}]}
           items={intervals}
-          placeholder='select interval'
+          
+          // key={({item})=>item.id}
         />
 
 
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     height: width * 0.9,
     paddingTop: '5%',
     justifyContent: 'center',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     alignContent: 'flex-start',
     flexDirection: 'row'
 

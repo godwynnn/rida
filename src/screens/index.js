@@ -42,7 +42,7 @@ export default function IndexView() {
    
 
     <SafeAreaView style={styles.container}>
-      <View style={tw`bg-[#120719] flex-0.5  p-4 pt-6 `}>
+      <View style={tw`bg-[#120719] flex-0.4  p-4 pt-6 `}>
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
