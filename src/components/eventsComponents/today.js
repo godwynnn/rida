@@ -1,15 +1,20 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { View,SafeAreaView,Text,FlatList, TouchableOpacity,Image, StyleSheet,Dimensions } from 'react-native'
 import tailwind from 'twrnc'
 // import { Image } from 'react-native'
 import img1 from '../../../assets/ft1.png'
+import { useSelector } from 'react-redux'
+
+import { selectTripData } from '../../reducer/reducer'
 
 const {width,height}=Dimensions.get('window')
 const feature_data=[
   {
     title:'Ride',
     image: require('../../../assets/ft1.png'),
-    id:0
+    id:0,
+    next_screen:'MapScreen',
+    service:'RIDE'
   },
   // {
   //   title: 'resturant',
@@ -20,12 +25,33 @@ const feature_data=[
   {
     title: 'Delivery',
     image: require('../../../assets/ft3.png'),
-    id:2
+    id:2,
+    service:'DELIVERY'
   },
 
 ]
-export default function Today() {
+
+
+
+
+
+export default function Today({navigation}) {
   const tw=tailwind
+  const LocationData = useSelector(selectTripData)
+
+
+  const gotoMapScreen=(screen)=>{
+    navigation.navigate(screen)
+
+  }
+
+
+  const setService=(value)=>{
+    console.log('SERVICE',value.service)
+    gotoMapScreen(value.next_screen)
+  }
+
+ 
   return (
     // <SafeAreaView style={styles.container}>
 
@@ -34,12 +60,16 @@ export default function Today() {
     data={feature_data}
     contentContainerStyle={styles.container}
     
+    
 
     keyExtractor={(item,index)=>item.id}
     renderItem={({item})=>{
-      return (<TouchableOpacity  >
-        <View style={{width:150,height:200, backgroundColor:'whitesmoke',margin:4,
-         justifyContent:'center',alignItems:'center'}} >
+      return (
+      <TouchableOpacity  onPress={()=>setService(item)} disabled={!LocationData.origin }>
+        <View style={[{width:150,height:200, backgroundColor:'whitesmoke',margin:4,
+         justifyContent:'center',alignItems:'center'}, tw`${!LocationData.origin &&'opacity-20'} `]}
+         
+         >
             
           <Image source={item.image} style={{width:70,height:70}}/>
           <Text style={{fontSize:15, marginTop:10}}>{item.title}</Text>

@@ -7,15 +7,28 @@ import { Provider } from 'react-redux';
 import { store } from './src/store/store';
 // import AppWrapper from '.';
 import Index from './src';
+import { registerRootComponent } from 'expo';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { style } from 'twrnc';
 
 
 export default function App() {
   return (
 
-    <Provider store={store}>
-      <Index/>
-    </Provider>
+
+
+    <GestureHandlerRootView style={{flex:1}}>
+      <Provider store={store}>
+
+        <Index />
+
+
+
+
+      </Provider>
+      </GestureHandlerRootView>
    
+
   )
 }
 
@@ -27,3 +40,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+registerRootComponent(App)

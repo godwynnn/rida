@@ -1,13 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React,{useContext,useRef,useEffect,useState} from "react";
-import { Text,View,KeyboardAvoidingView, Platform, } from "react-native";
+import { Text,View,KeyboardAvoidingView, Platform } from "react-native";
 import {OnboardingView} from "./screens/onboarding"
 import {Authentication} from "./screens/auth"
 import { LoginView } from "./screens/login";
 import { SignupView } from "./screens/signup";
 import { getItem } from "../utils/asyncStorage";
 import IndexView from "./screens";
+import Mapscreen from "./screens/mapscreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import destination from "./components/destination";
 
 
 // import IndexView from "./screens";
@@ -59,6 +61,9 @@ function Navigation(){
                         <stack.Navigator screenOptions={{headerShown:false}} initialRouteName="onboarding">
                                 <stack.Screen component={OnboardingView} name="onboarding"/>
                                 <stack.Screen component={Authentication} name="auth"/>
+                                <stack.Screen component={Authentication} name="auth"/>
+                                <stack.Screen component={LoginView} name="login"/>
+                                <stack.Screen component={SignupView} name="signup"/>
 
                         </stack.Navigator>
                 </KeyboardAvoidingView>
@@ -74,10 +79,11 @@ function Navigation(){
                     >
                         <stack.Navigator screenOptions={{headerShown:false}} initialRouteName="auth">
                                 {/* <stack.Screen component={OnboardingView} name="onboarding"/> */}
-                                <stack.Screen component={Authentication} name="auth"/>
+                                {/* <stack.Screen component={Authentication} name="auth"/>
                                 <stack.Screen component={LoginView} name="login"/>
-                                <stack.Screen component={SignupView} name="signup"/>
+                                <stack.Screen component={SignupView} name="signup"/> */}
                                 <stack.Screen component={IndexView} name="index"/>
+                                <stack.Screen component={Mapscreen} name="MapScreen"/>
                 
                         </stack.Navigator>
 

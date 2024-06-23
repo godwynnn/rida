@@ -2,9 +2,9 @@ import React from 'react'
 import { Text,SafeAreaView,View,StyleSheet } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Today from './eventsComponents/today';
-import Tomorrow from './eventsComponents/tomorrow';
 import NextTomorrow from './eventsComponents/next-tomorrow';
 import Others from './eventsComponents/others';
+import Schedule from './eventsComponents/schedule';
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -23,9 +23,9 @@ export default function Events() {
         }
     }}>
         <Tab.Screen name={'Today'} component={Today} />
-        <Tab.Screen name='Tomorrow' component={Tomorrow} />
+        <Tab.Screen name='Schedule' component={Schedule} />
         {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
-        <Tab.Screen name='Others' component={Others} />
+        {/* <Tab.Screen name='Others' component={Others} /> */}
     </Tab.Navigator>
   )
 }

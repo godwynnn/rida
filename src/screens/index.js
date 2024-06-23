@@ -1,34 +1,51 @@
-import React, { useEffect } from 'react'
-import { Text, View,StyleSheet, SafeAreaView,StatusBar,FlatList } from 'react-native'
+import React, { useEffect,useRef } from 'react'
+import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform } from 'react-native'
 import { useSelector } from 'react-redux'
-import { SelectAccessToken,SelectRefreshToken,SelectLoggedInStatus } from '../reducer/reducer'
-import tailwind from 'twrnc'
+import { SelectAccessToken, SelectRefreshToken, SelectLoggedInStatus } from '../reducer/reducer'
+
 import { TextInput } from 'react-native-paper'
 import Events from '../components/events'
-import {GOOGLE_API_KEY} from '@env'
+import { GOOGLE_API_KEY } from '@env'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import tailwind from 'twrnc'
+import { Modal } from 'react-native'
+import Mapscreen from './mapscreen'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import {Modalize} from 'react-native-modalize';
+
+import { useDispatch } from 'react-redux'
+import { LocationAction } from '../reducer/reducer'
+
+
 
 
 
 export default function IndexView() {
-  let u_data=useSelector(async (state)=>await state.authreducer)
-  const stored_data= u_data
-  console.log('STORED_DATA',stored_data)
-  const tw=tailwind
+  let u_data = useSelector(async (state) => await state.authreducer)
+  const stored_data = u_data
+  console.log('STORED_DATA', stored_data)
+  const tw = tailwind
   // console.log(GOOGLE_API_KEY)
-  
+  const modalRef = useRef(null);
+  const openModal = () => modalRef.current?.open();
 
 
-  useEffect(()=>{
-    console.log('STORED_DATA',stored_data)
-  },[])
-  
+
+  useEffect(() => {
+    console.log('STORED_DATA', stored_data)
+    openModal()
+  }, [])
+
+  const dispatch=useDispatch()
+
   return (
-    <SafeAreaView style={styles.container}>
-        <View style={tw`bg-[#120719] flex-0.7   p-2 `}>
+   
 
-          <GooglePlacesAutocomplete
-          placeholder='Where are you going to?'
+    <SafeAreaView style={styles.container}>
+      <View style={tw`bg-[#120719] flex-0.5  p-4 pt-6 `}>
+
+        <GooglePlacesAutocomplete
+          placeholder='Select Pickup point?'
           // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
           // currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch'
@@ -36,62 +53,65 @@ export default function IndexView() {
           fetchDetails={true}
 
           styles={{
-            textInput:{fontSize:15},
-            container:{flex:0},
-            textInputContainer:{marginTop:50}
+            textInput: { fontSize: 15,height:'100%'  },
+            container: { flex: 1.5 },
+            textInputContainer: { marginTop: 15, height:60,zIndex:10000}
           }}
           minLength={1}
-          debounce={200} 
+          debounce={100}
           query={{
             key: GOOGLE_API_KEY,
-            language: 'en', 
-  
+            language: 'en',
+
           }}
-          />
 
-      <GooglePlacesAutocomplete
-                placeholder='Where are you going to?'
-                // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-                // currentLocationLabel="Current location"
-                nearbyPlacesAPI='GooglePlacesSearch'
-                listViewDisplayed={true}
-                fetchDetails={true}
-                styles={{
-                  textInput:{fontSize:15},
-                  container:{flex:1},
-                  textInputContainer:{marginTop:5,padding:1}
-                }}
-                
-                minLength={1}
-                debounce={200} 
-                query={{
-                  key: {GOOGLE_API_KEY},
-                  language: 'en', 
-        
-                }}
-              
-                />
-       
-        </View>
+          onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+            console.log('DATA',data);
+            console.log('DETAILS',details);
 
-        
-            <Events/>
+            dispatch(LocationAction.setOrigin({'origin':details.geometry.location,
+              'origin_desc':data.description
+            }))
+            dispatch(LocationAction.setDestination({'destination':null,'destination_desc':null}))
+
+          }}
+          enablePoweredByContainer={false}
+
+
+
+        />
+
+
        
+
+
+      </View>
+
+
+      <Events />
+      
+      {/* <Modalize
+      modalHeight={1000}
+      >
+        <Mapscreen/>
+      </Modalize> */}
+
     </SafeAreaView>
+
   )
 }
 
-styles=StyleSheet.create({
-  container:{
-    backgroundColor:'white',
-    flex:1,
-    paddingTop: Platform.OS==='android'? StatusBar.currentHeight : '0',
-    justifyContent:'center',
+styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : '0',
+    justifyContent: 'center',
 
 
   },
-  sub_container:{
-    flex:0.8,
+  sub_container: {
+    flex: 0.8,
   }
 })
 
