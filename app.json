@@ -1,13 +1,15 @@
 {
   "expo": {
-    "name": "ride",
-    "slug": "ride",
+    "name": "rida app",
+    "slug": "ride-app",
+    "description": "A Ride booking app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo/rida_icon.png",
     "userInterfaceStyle": "light",
+ 
     "splash": {
-      "image": "./assets/logo/3.png",
+      "image": "./assets/logo/4.png",
       "resizeMode": "cover",
       "backgroundColor": "#191C25"
     },
@@ -19,15 +21,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/logo/rida_icon.png",
+        "backgroundColor": "#191C25"
+      },
+      "package": "ride.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "54f38a4d-23d3-47a7-98a0-2df05014e775"
+      }
+    }
   }
 }

@@ -6,8 +6,10 @@ import Cab from './rideComponents/cab'
 import Bike from './rideComponents/bike'
 
 const Tab =createMaterialTopTabNavigator()
-function BookRide() {
+function BookRide({route}) {
 
+
+  console.log('BookRide ', route.params)
 
   const tw = tailwind
   return (
@@ -26,8 +28,8 @@ function BookRide() {
   }}
     
     >
-      <Tab.Screen component={Cab}  name='cab' />
-      <Tab.Screen component={Bike}  name='bike' />
+      <Tab.Screen component={Cab}  name='cab'  initialParams={{data :route.params}} />
+      <Tab.Screen component={Bike}  name='bike' initialParams={{data :route.params}} />
 
 
 

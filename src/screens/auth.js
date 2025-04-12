@@ -58,11 +58,11 @@ export const Authentication=({navigation})=>{
 const styles=StyleSheet.create({
     container:{
         flex:1,
-        paddingTop: Platform.OS==='android'? StatusBar.currentHeight : '0',
+        paddingTop: Platform.OS==='android'? '0' : '0',
         backgroundColor:'#ffff'
     },
     intro:{
-        flex:0.50,
+        flex:0.45,
         backgroundColor:'#1D1A38',
         justifyContent:'center',
         alignContent:'center',

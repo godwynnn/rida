@@ -1,6 +1,5 @@
 
 import { configureStore,combineReducers } from "@reduxjs/toolkit"
-// import AuthenticationReducer from '../reducer/reducer'
 import { AuthenticationReducer } from "../reducer/reducer"
 import { LocationReducer } from "../reducer/reducer"
 

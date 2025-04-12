@@ -1,21 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GOOGLE_API_KEY } from '@env'
 import tailwind from 'twrnc'
 import { useDispatch } from 'react-redux'
 import { View,Text } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { LocationAction } from '../reducer/reducer'
+import { Url } from '../urls'
+import { useSelector } from 'react-redux'
+import { selectTripData } from '../reducer/reducer'
 
 
-
+const urls=Url()
 function Destination({navigation}) {
+    const LocationData = useSelector(selectTripData)
     const tw = tailwind
     const dispatch=useDispatch()
+    const [priceData,setPriceData]=useState({})
+
+    const GetPriceData=(destination)=>{
+            fetch(urls.priceData, {
+              method:'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify({'origin':LocationData.origin.origin,'destination': destination})
+            } ).then(res => res.json()
+            ).then(data =>{
+              if(data.success === true){
+                navigation.navigate('bookRide',{
+                  params:data.data
+                })
+              }
+            console.log(data)
+            })
+        
+    }
+
+    
 
     return (
         <>
 
-            <View style={tw`flex flex-col justify-center items-center bg-white`}>
+            <View style={tw`flex justify-center items-center bg-white`}>
                 <Text style={tw`font-bold text-[30px]`}>Destination</Text>
             </View>
 
@@ -42,13 +68,15 @@ function Destination({navigation}) {
                     }}
                     // enablePoweredByContainer={false}
                     onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                        console.log(data, details);
+                        // console.log( details);
                         dispatch(LocationAction.setDestination({
                             'destination': details.geometry.location,
                             'destination_desc': data.description
                         }));
-                        navigation.navigate('bookRide')
-                    }}
+                        GetPriceData(details.geometry.location)
+                        // navigation.navigate('bookRide')
+                    
+                    }} 
                     enablePoweredByContainer={false}
 
 

@@ -1,30 +1,25 @@
 import React,{useState,useEffect,useContext} from "react";
 import { Text,View,FlatList,ScrollView,Image,StyleSheet,Dimensions,Platform, TouchableOpacity } from "react-native";
-import img1 from '../../assets/img1.gif';
-import img2 from '../../assets/img2.png';
-import img3 from '../../assets/img3.gif';
-import img4 from '../../assets/img4.png';
+
 import img5 from '../../assets/img5.png';
-import img6 from '../../assets/img6.gif';
 import img7 from '../../assets/img7.png';
 import img8 from '../../assets/img8.png';
-import Onboarding from 'react-native-onboarding-swiper';
+import Onboarding from "react-native-onboarding-swiper";
+
 import { useFonts } from "expo-font";
 import { Zeyada_400Regular } from "@expo-google-fonts/zeyada";
 import { Audiowide_400Regular } from "@expo-google-fonts/audiowide";
-import AppLoading from "expo-app-loading";
 import * as Font from 'expo-font';
-import * as splashScreen from 'expo-splash-screen'
-import { SafeAreaView } from "react-native-safe-area-context";
+// import SafeAreaView from 'react-native-safe-area-view';
 import { useNavigation } from "@react-navigation/native";
 import { setItem } from "../../utils/asyncStorage";
 
 
 
 const {width, height} = Dimensions.get('window')
-export const OnboardingView=()=>{
+export const OnboardingView=({navigation})=>{
 
-    const navigation=useNavigation()
+    // const navigation=useNavigation()
     
     const onDoneBtn=({...props})=>{
        return( <TouchableOpacity {...props} style={styles.donebtn}>
@@ -50,20 +45,20 @@ export const OnboardingView=()=>{
             
             ),
             
-            subtitle: 'Done with React Native Onboarding Swiper',
+            subtitle: '',
         },
         {
             backgroundColor: '#2E2C11',
             image: <Image source={img8}  style={styles.img}/>,
             title: 'Pick a location',
-            subtitle: 'Done with React Native Onboarding Swiper',
+            subtitle: '',
         },
         {
             backgroundColor: '#23112E',
             image: <Image source={img7} style={styles.img} />,
             
             title: 'Enjoy Your Ride',
-            subtitle: 'Done with React Native Onboarding Swiper',
+            subtitle: '',
         }
         
     ]

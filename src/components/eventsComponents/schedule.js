@@ -42,16 +42,16 @@ export default function Schedule() {
   const [selectedItems, setSelectedItems] = useState([]);
   const tw = tailwind
   return (
-    <SafeAreaView style={[styles.container, { display: 'flex', flexDirection: 'column' }]}>
+    <SafeAreaView style={[styles.container, { display: 'flex'}]}>
 
-      <View style={[{ flex: 1 }, tw`pl-10 pr-10 pt-4 flex flex-column gap-2`]}>
+      <View style={[{ flex: 1 }, tw`pl-10 pr-10 pt-4 flex gap-2`]}>
 
       
 
 
       <RNPickerSelect
           onValueChange={(value) => console.log(value)}
-          style={[tw`w-[100%] h-10`, { fontSize: 5}]}
+          style={{ fontSize: 5,width:'100%', height:10}}
           items={intervals}
           
           // key={({item})=>item.id}
@@ -73,7 +73,7 @@ export default function Schedule() {
 
       <FlatList
         data={feature_data}
-        contentContainerStyle={styles.container}
+        contentContainerStyle={[styles.container,tw`flex-row`]}
 
 
 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // flexWrap: 'wrap',
     alignContent: 'flex-start',
-    flexDirection: 'row'
+    // flexDirection: 'row'
 
   },
   image: {

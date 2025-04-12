@@ -14,15 +14,16 @@ export default function Events() {
     <Tab.Navigator initialRouteName='Today' 
     
     screenOptions={{
-        tabBarLabelStyle:{fontSize:8},
-        tabBarStyle:{borderBottomWidth:0,elevation:0, backgroundColor:0},
+      tabBarShowLabel:true,
+        tabBarLabelStyle:{fontSize:8,color:'black'},
+        tabBarStyle:{borderBottomWidth:0,elevation:0, backgroundColor:'white'},
         // tabBarActiveTintColor:"gray",
         tabBarIndicatorStyle:{
         backgroundColor:'gray',
 
         }
     }}>
-        <Tab.Screen name={'Today'} component={Today} />
+        <Tab.Screen name='Today' component={Today} />
         <Tab.Screen name='Schedule' component={Schedule} />
         {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
         {/* <Tab.Screen name='Others' component={Others} /> */}

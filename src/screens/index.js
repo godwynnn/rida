@@ -1,3 +1,5 @@
+import 'react-native-get-random-values'
+
 import React, { useEffect,useRef } from 'react'
 import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform } from 'react-native'
 import { useSelector } from 'react-redux'
@@ -15,12 +17,15 @@ import {Modalize} from 'react-native-modalize';
 
 import { useDispatch } from 'react-redux'
 import { LocationAction } from '../reducer/reducer'
+import { getItem } from '../../utils/asyncStorage'
 
 
 
 
 
-export default function IndexView() {
+
+function IndexView({navigation}) {
+
   let u_data = useSelector(async (state) => await state.authreducer)
   const stored_data = u_data
   console.log('STORED_DATA', stored_data)
@@ -28,6 +33,10 @@ export default function IndexView() {
   // console.log(GOOGLE_API_KEY)
   const modalRef = useRef(null);
   const openModal = () => modalRef.current?.open();
+  const auth_access_token= getItem('auth_access_token')
+   const auth_refresh_token= getItem('auth_refresh_token')
+
+   console.log('ACCESS TOKEN ',auth_access_token)
 
 
 
@@ -42,7 +51,7 @@ export default function IndexView() {
    
 
     <SafeAreaView style={styles.container}>
-      <View style={tw`bg-[#120719] flex-0.4  p-4 pt-6 `}>
+      <View style={tw`bg-[#120719] flex-0.4  p-4 pt-7 `}>
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
@@ -66,8 +75,8 @@ export default function IndexView() {
           }}
 
           onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-            console.log('DATA',data);
-            console.log('DETAILS',details);
+            // console.log('DATA',data);
+            // console.log('DETAILS',details);
 
             dispatch(LocationAction.setOrigin({'origin':details.geometry.location,
               'origin_desc':data.description
@@ -100,12 +109,13 @@ export default function IndexView() {
 
   )
 }
+export default IndexView
 
 styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : '0',
+    paddingTop: Platform.OS === 'android' ? '0' : '0',
     justifyContent: 'center',
 
 

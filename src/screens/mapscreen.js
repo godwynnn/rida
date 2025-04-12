@@ -4,11 +4,13 @@ import { useSelector } from 'react-redux'
 import { selectTripData } from '../reducer/reducer'
 import MapViewDirections from 'react-native-maps-directions'
 import { GOOGLE_API_KEY } from '@env'
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { BottomSheetModalProvider, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import tailwind from 'twrnc'
-
+import BottomSheet, {
+  BottomSheetModal,
+  BottomSheetView,
+  BottomSheetModalProvider, BottomSheetBackdrop
+} from '@gorhom/bottom-sheet';
+import tailwind, { style } from 'twrnc'
 
 import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform } from 'react-native'
 
@@ -23,6 +25,7 @@ import { useDispatch } from 'react-redux'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Destination from '../components/destination';
 import BookRide from '../components/bookRide'
+import { Url } from '../urls'
 
 
 
@@ -30,7 +33,9 @@ import BookRide from '../components/bookRide'
 
 
 
-export default function Mapscreen() {
+
+const urls=Url()
+function Mapscreen({navigation}) {
 
 
   const LocationData = useSelector(selectTripData)
@@ -43,28 +48,70 @@ export default function Mapscreen() {
 
   const snapToIndex = (index) => bottomRef.current?.snapToIndex(index)
 
+  useEffect(() => {
+
+  }, [])
+
   const backdrop = useCallback((props) => <BottomSheetBackdrop
     {...props}
     appearsOnIndex={1}
     disappearsOnIndex={0}
     onPress={() => snapToIndex(0)}
 
-
-
   />, [])
 
 
-  console.log('location', LocationData)
+  // console.log('location', LocationData)
 
   useEffect(() => {
 
-    if (!LocationData.origin || !LocationData.destination) return
+    if (!LocationData.origin || !LocationData.destination || !mapRef.current) return
 
-    mapRef.current.fitToSuppliedMarkers(["origin", "destination"], {
-      edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
-    });
 
-  }, [LocationData.origin, LocationData.destination])
+    setTimeout(() => {
+
+      mapRef.current.fitToSuppliedMarkers(["origin", "destination"], {
+        edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
+        animated: true,
+      });
+
+
+    }, 1500);
+
+
+
+
+  }, [LocationData.origin, LocationData.destination, mapRef])
+
+
+
+  // useEffect(() => {
+
+  //   fetch(urls.priceData, {
+  //     method:'POST',
+  //     headers: {
+  //       'content-type': 'application/json'
+  //     },
+  //     body: JSON.stringify({'origin':LocationData.origin.origin,'destination':LocationData.destination.destination})
+  //   } ).then(res => res.json()
+  //   ).then(data =>{
+  //     if(data.success === true){
+  //       navigation.navigate('bookRide',{
+  //         params:data.data
+  //       })
+  //     }
+  //   })
+
+   
+
+  // }, [LocationData.destination.destination])
+
+
+
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
+  }, []);
+
 
 
 
@@ -79,9 +126,10 @@ export default function Mapscreen() {
         initialRegion={{
           latitude: LocationData.origin.origin.lat,
           longitude: LocationData.origin.origin.lng,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
         }}
+      // onMapReady={fitMapToScreen}
 
 
 
@@ -111,6 +159,7 @@ export default function Mapscreen() {
             title='Destination'
             description={LocationData.destination.destination_desc}
             identifier='destination'
+            rotation={10.0}
           />
         )
 
@@ -125,6 +174,19 @@ export default function Mapscreen() {
             apikey={GOOGLE_API_KEY}
             strokeWidth={3}
             strokeColor="black"
+            onStart={() => {
+              dispatch(LocationAction.setTravelTimeData({ ...LocationData, 'ready': false }))
+
+
+            }}
+            onReady={result => {
+              dispatch(LocationAction.setTravelTimeData({ ...LocationData, 'time': result.duration.toFixed(0).toString(), 'ready': true }))
+
+              console.log(result.distance.toFixed(1))
+              console.log(result.duration.toFixed(0).toString())
+
+              console.log('ready')
+            }}
 
           />
 
@@ -135,40 +197,36 @@ export default function Mapscreen() {
 
       </MapView>
 
-
-      <BottomSheet snapPoints={snapPoints} index={1}
+      <BottomSheet snapPoints={snapPoints} index={2}
         backdropComponent={backdrop}
         ref={bottomRef}
-        onClose={()=>snapToIndex(0)}
+        onClose={() => snapToIndex(0)}
+        enableDynamicSizing={false}
+      // onChange={handleSheetChanges}
       >
         <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="destination">
 
-        <stack.Screen
+          <stack.Screen
             component={Destination}
             name='destination'
 
           />
 
 
-        <stack.Screen
+          <stack.Screen
             component={BookRide}
+            
             name='bookRide'
 
           />
-
-
-          
-
-          
-
-
-
-
         </stack.Navigator>
-
-
-
       </BottomSheet>
+
+
+
+
+
+
 
 
     </SafeAreaView>
@@ -176,11 +234,14 @@ export default function Mapscreen() {
 
   )
 }
+export default Mapscreen
+
 const styles = StyleSheet.create({
   container: {
 
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : '0',
+    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : '0',
+    paddingTop: Platform.OS === 'android' ? '0' : '0',
     // justifyContent: 'center',
 
 
@@ -189,5 +250,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
 
-  }
+  },
+
+  Modalcontainer: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: "grey",
+  },
+
+  // ModalcontentContainer: {
+  // 	flex: 1,
+  // 	alignItems: "center",
+  // },
 })

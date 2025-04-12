@@ -14,8 +14,7 @@ import { Text,
     Button,
     
     } from "react-native";
-    // import LinearGradient from "react-native-linear-gradient";
-    // import { LinearGradient } from 'expo-linear-gradient';
+    
     import { TextInput } from "react-native-paper";
     import { Formik } from "formik";
     import * as yup from 'yup';
@@ -24,11 +23,9 @@ import { Text,
 import { AuthenticationAction } from "../reducer/reducer";
 import axios from "axios";
 import { ScrollView } from "react-native";
-// import { secureSetItem } from "../../utils/secureStorage";  
 import { setItem,getItem } from "../../utils/asyncStorage";
 import { Url } from "../urls";
 import {ActivityIndicator,MD2Colors} from "react-native-paper";
-// import { useNavigation } from "@react-navigation/native";
 
 const {height,width}=Dimensions.get('window')
 
@@ -59,26 +56,30 @@ export const LoginView=({navigation})=>{
         //     console.log(res)
         //     console.log('yes')
         //     // console.log(values)
-        // }).catch(error=> console.log(error))
+        // }).catch(error=> console.log(error)
+        console.warn(values)
         setloader(true)
-
+        // console.log(values)
         const res=await fetch(urls.login,{
             method:'POST',
             headers: {
                 'content-type': 'application/json'
                 
               },
+              
               body:JSON.stringify(values)
         }).catch(error=>{
+            console.log(values)
             console.log(`ERROR ${error}`)
         })
         const data=await res.json()
-        console.log(data)
+        console.warn(data)
        
         if(data.success===true){
             console.log(JSON.stringify(data))
             setItem('auth_access_token',data.token.access)
             setItem('auth_refresh_token',data.token.refresh)
+            setItem('logged_in','1')
             dispatch(AuthenticationAction.Login())
             
             

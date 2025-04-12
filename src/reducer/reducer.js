@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { secureGetItem } from "../../utils/secureStorage";
 import { getItem } from "../../utils/asyncStorage";
 
 
@@ -34,18 +33,9 @@ export const AuthenticationSlice=createSlice({
     //   serializableCheck: false,
     // }),
     reducers:{
-        Login:async (state,action)=>{
+        Login: (state,action)=>{
             
-           const auth_access_token=await getItem('auth_access_token')
-           const auth_refresh_token=await getItem('auth_refresh_token')
-        //    const data=JSON.parse(auth_data)
-        //    console.log('AUTH DATA :',auth_access_token)
-        //    console.log('AUTH DATA :',data.token.access)
-
-            state.refresh_token=auth_refresh_token
-            state.access_token=auth_access_token
-            state.status=true
-            console.log('STATE', state)
+            state.status=true;
            
         
         },
@@ -57,9 +47,9 @@ export const AuthenticationSlice=createSlice({
     // reducers:AuthenticationReducer(state,action),
 })
 const {actions:AuthenticationAction,reducer:AuthenticationReducer}=AuthenticationSlice
-export const SelectAccessToken=(state)=>state.access_token
-export const SelectRefreshToken=(state)=>state.refresh_token
-export const SelectLoggedInStatus=(state)=>state.status
+export const SelectAccessToken=(state)=>{state.access_token}
+export const SelectRefreshToken=(state)=>{state.refresh_token}
+export const SelectLoggedInStatus=(state)=>{state.status}
 
 export  {AuthenticationAction,AuthenticationReducer}
 
@@ -70,13 +60,14 @@ export  {AuthenticationAction,AuthenticationReducer}
 
 
 const LocationState={
-    'origin':null,
-    'destination':null,
-    'origin_desc':null,
-    'destination_desc':null,
-    'data':null,
-    'service':null,
-    'schedule':{},
+    origin:null,
+    destination:null,
+    origin_desc:null,
+    destination_desc:null,
+    data:null,
+    service:null,
+    schedule:{},
+    map_ready:false
     
 
     // 'schedule_timestamp':null
@@ -93,6 +84,7 @@ export const LocationSlice=createSlice({
         },
         setTravelTimeData:(state,action)=>{
             state.data=action.payload
+            state.map_ready=action.payload.ready
         },
 
         setService:(state,action)=>{
