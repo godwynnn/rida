@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GOOGLE_API_KEY } from '@env'
 import tailwind from 'twrnc'
 import { useDispatch } from 'react-redux'
-import { View,Text } from 'react-native'
+import { View,Text, Pressable } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { LocationAction } from '../reducer/reducer'
 import { Url } from '../urls'
@@ -46,7 +46,7 @@ function Destination({navigation}) {
                 <Text style={tw`font-bold text-[30px]`}>Destination</Text>
             </View>
 
-            <View style={[{ flex: 1 }, tw`p-4 bg-white`]}>
+            <View style={[{ flex: 1,justifyContent:'space-between' }, tw`p-4 bg-white`]}>
                 <GooglePlacesAutocomplete
                     placeholder='Where are you going to?'
                     // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
@@ -85,8 +85,13 @@ function Destination({navigation}) {
                 />
 
 
-                <View >
+                <View style={[tw`flex flex-row `,{justifyContent:'space-around'}]} >
                   
+                  <Button labelStyle={{color:'white'}} onPress={()=>navigation.navigate('index')}
+                   icon={'keyboard-backspace'} style={[tw `bg-[#24272B] p-2 px-4 rounded-[10px]`]}>
+                    <Text>Go Back</Text></Button>
+
+                  <Button labelStyle={{color:'white'}} icon={'clock-time-eleven-outline'} style={tw `bg-[#24272B] p-2 px-4 rounded-[10px]`}><Text>Events</Text></Button>
 
                 </View>
 
