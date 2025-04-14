@@ -8,6 +8,7 @@ import { LocationAction } from '../reducer/reducer'
 import { Url } from '../urls'
 import { useSelector } from 'react-redux'
 import { selectTripData } from '../reducer/reducer'
+import { Button } from 'react-native-paper'
 
 
 const urls=Url()
@@ -55,9 +56,9 @@ function Destination({navigation}) {
                     fetchDetails={true}
 
                     styles={{
-                        textInput: { fontSize: 15, height: '100%', borderColor: 'black', borderWidth: 2 },
+                        textInput: { fontSize: 15, height: '100%', borderColor: 'black', borderWidth: 0, backgroundColor:'#ECEEE9' },
                         container: { flex: 0 },
-                        textInputContainer: { marginTop: 20, height: 50, zIndex: 100 }
+                        textInputContainer: { marginTop: 20, height: 50, zIndex: 100}
                     }}
                     minLength={1}
                     debounce={400}
@@ -83,6 +84,13 @@ function Destination({navigation}) {
 
                 />
 
+
+                <View >
+                  
+
+                </View>
+
+                
             </View>
 
         </>

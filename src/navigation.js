@@ -10,10 +10,22 @@ import IndexView from "./screens";
 import Mapscreen from "./screens/mapscreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Destination from "./components/destination";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 
 
+export function MyDrawer() {
+    const Drawer = createDrawerNavigator();
+    return (
+      <Drawer.Navigator screenOptions={{headerTitle:'', headerTransparent:true, headerShown:true }}>
+        
+        <Drawer.Screen component={Mapscreen} name="Map" options={{headerShown:true}} />
+
+        
+      </Drawer.Navigator>
+    );
+  }
 
 
 function Navigation() {
@@ -72,7 +84,7 @@ function Navigation() {
         return (
             <KeyboardAvoidingView
 
-                behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={{ flex: 1 }}
             >
                 <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="onboarding">
@@ -103,7 +115,7 @@ function Navigation() {
                         <stack.Screen component={LoginView} name="login" />
                         <stack.Screen component={SignupView} name="signup" />
                         <stack.Screen component={IndexView} name="index" />
-                        <stack.Screen component={Mapscreen} name="MapScreen" />
+                        <stack.Screen component={Mapscreen} name="Mapscreen" />
 
 
 
@@ -125,10 +137,12 @@ function Navigation() {
 
 
 
-                        <stack.Screen component={IndexView} name="index" />
-                        <stack.Screen component={Mapscreen} name="MapScreen" />
+                        <stack.Screen component={IndexView} name="index"  />
+                        <stack.Screen component={Mapscreen} name="Mapscreen" />
+                       
 
                     </stack.Navigator>
+                    
 
                 </KeyboardAvoidingView>
             )

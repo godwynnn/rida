@@ -1,6 +1,6 @@
 import 'react-native-get-random-values'
 
-import React, { useEffect,useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SelectAccessToken, SelectRefreshToken, SelectLoggedInStatus } from '../reducer/reducer'
@@ -13,7 +13,7 @@ import tailwind from 'twrnc'
 import { Modal } from 'react-native'
 import Mapscreen from './mapscreen'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import {Modalize} from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 
 import { useDispatch } from 'react-redux'
 import { LocationAction } from '../reducer/reducer'
@@ -24,7 +24,7 @@ import { getItem } from '../../utils/asyncStorage'
 
 
 
-function IndexView({navigation}) {
+function IndexView({ navigation }) {
 
   let u_data = useSelector(async (state) => await state.authreducer)
   const stored_data = u_data
@@ -33,10 +33,10 @@ function IndexView({navigation}) {
   // console.log(GOOGLE_API_KEY)
   const modalRef = useRef(null);
   const openModal = () => modalRef.current?.open();
-  const auth_access_token= getItem('auth_access_token')
-   const auth_refresh_token= getItem('auth_refresh_token')
+  const auth_access_token = getItem('auth_access_token')
+  const auth_refresh_token = getItem('auth_refresh_token')
 
-   console.log('ACCESS TOKEN ',auth_access_token)
+  console.log('ACCESS TOKEN ', auth_access_token)
 
 
 
@@ -45,13 +45,13 @@ function IndexView({navigation}) {
     openModal()
   }, [])
 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
 
   return (
-   
+
 
     <SafeAreaView style={styles.container}>
-      <View style={tw`bg-[#120719] flex-0.4  p-4 pt-7 `}>
+      <View style={tw`bg-[#1D1A38] flex-0.4  p-4 pt-7 `}>
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
@@ -62,9 +62,9 @@ function IndexView({navigation}) {
           fetchDetails={true}
 
           styles={{
-            textInput: { fontSize: 15,height:'100%'  },
+            textInput: { fontSize: 15, height: '100%' },
             container: { flex: 1.5 },
-            textInputContainer: { marginTop: 15, height:60,zIndex:10000}
+            textInputContainer: { marginTop: 15, height: 60, zIndex: 10000 }
           }}
           minLength={1}
           debounce={100}
@@ -78,27 +78,29 @@ function IndexView({navigation}) {
             // console.log('DATA',data);
             // console.log('DETAILS',details);
 
-            dispatch(LocationAction.setOrigin({'origin':details.geometry.location,
-              'origin_desc':data.description
+            dispatch(LocationAction.setOrigin({
+              'origin': details.geometry.location,
+              'origin_desc': data.description
             }))
-            dispatch(LocationAction.setDestination({'destination':null,'destination_desc':null}))
+            dispatch(LocationAction.setDestination({ 'destination': null, 'destination_desc': null }))
 
           }}
           enablePoweredByContainer={false}
 
 
 
+
         />
 
 
-       
+
 
 
       </View>
 
 
       <Events />
-      
+
       {/* <Modalize
       modalHeight={1000}
       >

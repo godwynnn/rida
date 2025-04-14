@@ -108,8 +108,8 @@ function Cab({route}) {
 
 
             <View style={[tw`w-[100%] h-[18%] p-2 items-center`, {}]}>
-                <TouchableOpacity disabled={!selected} style={[tw`w-[70%] h-[100%] justify-center rounded-[30px] bg-green-900`,]}>
-                    <Text style={[tw`text-white text-center`, { fontSize: 20, fontWeight: 600 }]}>Book {selected.title}</Text>
+                <TouchableOpacity disabled={!selected} style={[tw`w-[70%] h-[100%] justify-center rounded-[20px] bg-green-900`,]}>
+                    <Text style={[tw`text-white text-center`, { fontSize: 20, fontWeight: 500 }]}>Book {selected.title}</Text>
                 </TouchableOpacity>
             </View>
 

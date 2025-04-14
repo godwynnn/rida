@@ -9,7 +9,7 @@ import Index from './src'
 import { registerRootComponent } from 'expo';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-
+import { PaperProvider } from 'react-native-paper';
 
 
 export default function App() {
@@ -20,11 +20,12 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
         <Provider store={store}>
+          <PaperProvider>
 
+          
           <Index />
-
-
-
+        
+          </PaperProvider>
 
         </Provider>
       </BottomSheetModalProvider>

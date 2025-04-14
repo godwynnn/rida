@@ -26,8 +26,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Destination from '../components/destination';
 import BookRide from '../components/bookRide'
 import { Url } from '../urls'
-
-
+import { Button } from 'react-native-paper'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerActions, NavigationContainer } from '@react-navigation/native';
+import IndexView from '.';
+import { useNavigation } from '@react-navigation/native'
 
 
 
@@ -35,6 +38,43 @@ import { Url } from '../urls'
 
 
 const urls=Url()
+
+
+export function SubStackGroup(){
+  const stack = createNativeStackNavigator()
+  return (
+  <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="destination">
+
+  
+
+    <stack.Screen
+      component={Destination}
+      name='destination'
+
+    />
+
+
+    <stack.Screen
+      component={BookRide}
+      
+      name='bookRide'
+
+    />
+  </stack.Navigator>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function Mapscreen({navigation}) {
 
 
@@ -44,7 +84,7 @@ function Mapscreen({navigation}) {
   const tw = tailwind
   const bottomRef = useRef(null)
   const dispatch = useDispatch()
-  const stack = createNativeStackNavigator()
+
 
   const snapToIndex = (index) => bottomRef.current?.snapToIndex(index)
 
@@ -85,26 +125,7 @@ function Mapscreen({navigation}) {
 
 
 
-  // useEffect(() => {
 
-  //   fetch(urls.priceData, {
-  //     method:'POST',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //     body: JSON.stringify({'origin':LocationData.origin.origin,'destination':LocationData.destination.destination})
-  //   } ).then(res => res.json()
-  //   ).then(data =>{
-  //     if(data.success === true){
-  //       navigation.navigate('bookRide',{
-  //         params:data.data
-  //       })
-  //     }
-  //   })
-
-   
-
-  // }, [LocationData.destination.destination])
 
 
 
@@ -118,6 +139,14 @@ function Mapscreen({navigation}) {
   return (
 
     <SafeAreaView style={styles.container}>
+
+
+      
+     
+
+      <Button icon={"home"} onPress={() => navigation.navigate('index')}  labelStyle={{ fontSize: 30,alignSelf:'center' }}
+      contentStyle={{justifyContent:'space-around', flexDirection:'row', padding:10}}
+      style={[tw`bg-[#ECEEE9] w-[8%] h-[60px] rounded-[50px] absolute z-1000 top-[5%] left-3 flex`]}  />
 
       <MapView
         ref={mapRef}
@@ -194,7 +223,6 @@ function Mapscreen({navigation}) {
         )}
 
 
-
       </MapView>
 
       <BottomSheet snapPoints={snapPoints} index={2}
@@ -204,22 +232,9 @@ function Mapscreen({navigation}) {
         enableDynamicSizing={false}
       // onChange={handleSheetChanges}
       >
-        <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="destination">
+          <SubStackGroup />
 
-          <stack.Screen
-            component={Destination}
-            name='destination'
-
-          />
-
-
-          <stack.Screen
-            component={BookRide}
-            
-            name='bookRide'
-
-          />
-        </stack.Navigator>
+       
       </BottomSheet>
 
 

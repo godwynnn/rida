@@ -13,7 +13,7 @@ const feature_data=[
     title:'Ride',
     image: require('../../../assets/ft1.png'),
     id:0,
-    next_screen:'MapScreen',
+    next_screen:'Mapscreen',
     service:'RIDE'
   },
   // {
