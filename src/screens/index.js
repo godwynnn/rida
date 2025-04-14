@@ -1,7 +1,7 @@
 import 'react-native-get-random-values'
 
 import React, { useEffect, useRef } from 'react'
-import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform } from 'react-native'
+import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform,TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SelectAccessToken, SelectRefreshToken, SelectLoggedInStatus } from '../reducer/reducer'
 
@@ -18,7 +18,9 @@ import { Modalize } from 'react-native-modalize';
 import { useDispatch } from 'react-redux'
 import { LocationAction } from '../reducer/reducer'
 import { getItem } from '../../utils/asyncStorage'
-
+import Svg, { Path } from 'react-native-svg';
+import { Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'
 
 
 
@@ -27,6 +29,7 @@ import { getItem } from '../../utils/asyncStorage'
 function IndexView({ navigation }) {
 
   let u_data = useSelector(async (state) => await state.authreducer)
+  const {width,height}=Dimensions.get('screen')
   const stored_data = u_data
   console.log('STORED_DATA', stored_data)
   const tw = tailwind
@@ -51,7 +54,7 @@ function IndexView({ navigation }) {
 
 
     <SafeAreaView style={styles.container}>
-      <View style={tw`bg-[#1D1A38] flex-0.4  p-4 pt-7 `}>
+      <View style={[tw`bg-[#1D1A38] flex-0.2 p-4 pt-5 `]}>
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
@@ -63,8 +66,11 @@ function IndexView({ navigation }) {
 
           styles={{
             textInput: { fontSize: 15, height: '100%' },
-            container: { flex: 1.5 },
-            textInputContainer: { marginTop: 15, height: 60, zIndex: 10000 }
+            container: { flex: 1.5,elevation:10,position:'absolute',
+              top:2,left:0,width:width,zIndex: 9999,paddingHorizontal:10 },
+            textInputContainer: { marginTop: 60, height: 60,opacity:0.9, borderRadius:50},
+            listView:{  zIndex: 9999,elevation: 10, }
+            
           }}
           minLength={1}
           debounce={100}
@@ -91,21 +97,29 @@ function IndexView({ navigation }) {
 
 
         />
-
-
-
+        {/* <Svg
+         height="70%"
+         width={width}
+         viewBox="0 0 1440 320"
+         style={{ position: 'absolute', top: '70%', left:'0' }}
+        >
+          <Path
+          fill={'#fff'}
+          d="M0,192L80,192C160,192,320,192,480,208C640,224,800,256,960,261.3C1120,267,1280,245,1360,234.7L1440,224L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
+          
+          />
+        </Svg> */}
 
 
       </View>
 
+      <View style={[tw`flex-0.8`,{zIndex:-1}]}>
+        <Events />
+      </View>
+      
 
-      <Events />
-
-      {/* <Modalize
-      modalHeight={1000}
-      >
-        <Mapscreen/>
-      </Modalize> */}
+     
+     
 
     </SafeAreaView>
 
@@ -118,7 +132,7 @@ styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     paddingTop: Platform.OS === 'android' ? '0' : '0',
-    justifyContent: 'center',
+    // justifyContent: 'space-between',
 
 
   },
