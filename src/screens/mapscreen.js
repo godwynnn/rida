@@ -29,7 +29,6 @@ import { Url } from '../urls'
 import { Button } from 'react-native-paper'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions, NavigationContainer } from '@react-navigation/native';
-import IndexView from '.';
 import { useNavigation } from '@react-navigation/native'
 
 

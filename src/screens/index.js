@@ -10,11 +10,11 @@ import Events from '../components/events'
 import { GOOGLE_API_KEY } from '@env'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import tailwind from 'twrnc'
-import { Modal } from 'react-native'
+import { Modal,KeyboardAvoidingView } from 'react-native'
 import Mapscreen from './mapscreen'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Modalize } from 'react-native-modalize';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useDispatch } from 'react-redux'
 import { LocationAction } from '../reducer/reducer'
 import { getItem } from '../../utils/asyncStorage'
@@ -54,7 +54,9 @@ function IndexView({ navigation }) {
 
 
     <SafeAreaView style={styles.container}>
-      <View style={[tw`bg-[#1D1A38] flex-0.2 p-4 pt-5 `]}>
+
+
+      <View style={[tw`bg-[#1D1A38] flex-0.2 p-4 pt-5 `, { zIndex: 10 }]}>
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
@@ -66,9 +68,9 @@ function IndexView({ navigation }) {
 
           styles={{
             textInput: { fontSize: 15, height: '100%' },
-            container: { flex: 1.5,elevation:10,position:'absolute',
+            container: { flex: 1,elevation:10,position:'absolute',
               top:2,left:0,width:width,zIndex: 9999,paddingHorizontal:10 },
-            textInputContainer: { marginTop: 60, height: 60,opacity:0.9, borderRadius:50},
+            textInputContainer: { marginTop: 60, height: 60,opacity:0.9, borderRadius:50, borderWidth:0},
             listView:{  zIndex: 9999,elevation: 10, }
             
           }}

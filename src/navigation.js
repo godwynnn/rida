@@ -102,12 +102,7 @@ function Navigation() {
         if (!is_loggedIn) {
             return (
 
-                <KeyboardAvoidingView
-
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    style={{ flex: 1 }}
-
-                >
+               
                     <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="auth">
 
 
@@ -120,19 +115,12 @@ function Navigation() {
 
 
                     </stack.Navigator>
-
-                </KeyboardAvoidingView>
             )
 
         } else {
             return (
 
-                <KeyboardAvoidingView
-
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    style={{ flex: 1 }}
-
-                >
+              
                     <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="index">
 
 
@@ -143,8 +131,6 @@ function Navigation() {
 
                     </stack.Navigator>
                     
-
-                </KeyboardAvoidingView>
             )
 
         }

@@ -47,13 +47,15 @@ const favourite_data=[
   {
     icon:'home',
     title:'Home',
-    info:'Add a home address'
+    info:'Add a home address',
+    id:0
   },
 
   {
     icon:'briefcase',
     title:'Work',
-    info:'Add a work address'
+    info:'Add a work address',
+    id:1
   }
 ]
 
@@ -77,10 +79,10 @@ export default function Today({ navigation }) {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }} >
+    <SafeAreaView style={{ height: '100%', backgroundColor: 'white' }} >
 
       <View style={{
-        flex: 0.3
+        height:'30%'
       }}>
         <FlatList
           data={feature_data}
@@ -88,6 +90,8 @@ export default function Today({ navigation }) {
           horizontal
           showsHorizontalScrollIndicator={false}
           legacyImplementation={false}
+          
+
 
           keyExtractor={(item, index) => item.id}
 
@@ -117,15 +121,16 @@ export default function Today({ navigation }) {
       </View>
 
       
-      <View style={[tw `p-0 px-4 flex-0.3`,{gap:10}]}>
+      <View style={[tw `p-0 px-4 h-40`,{gap:10}]}>
 
 
-      <Text style={tw `font-500 text-md`}> Favourite</Text>
+      <Text style={tw `font-500 text-[15px]`}> Favourite</Text>
 
       <FlatList
           data={favourite_data}
           contentContainerStyle={{gap:10}}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTap='handled'
           
           keyExtractor={(item, index) => item.id}
 
@@ -158,10 +163,10 @@ export default function Today({ navigation }) {
       </View>
 
 
-<View style={[tw` flex-0.4 p-4 pt-0 `,{}]}>
+<View style={[tw` h-50 p-4 pt-0 `,{}]}>
 
         
-        <View style={[tw`bg-[#1D1A38] flex-0.9  mt-10 `,{borderRadius:20,position:'relative'}]}>
+        <View style={[tw`bg-[#1D1A38] h-[85%]  mt-10 `,{borderRadius:20,position:'relative'}]}>
           <Text style={tw`text-[#fff] font-700 text-xl mt-5 ml-2`}>Schedule Your Ride</Text>
           <Text style={tw`text-[#fff] font-400 text-[12px] mt-1 ml-2`}> Plan ahead, ride stress-free</Text>
           <Text style={tw`text-[#fff] font-400 text-[12px] mt-1 ml-2`}> Schedule your ride now!</Text>
@@ -199,9 +204,7 @@ const styles = StyleSheet.create({
     height: width * 0.9,
     paddingTop: '8%',
     paddingHorizontal: 10,
-    // justifyContent:'center',
-    // alignItems:'center',
-    // flexWrap:'wrap',
+    flexGrow:1,
     alignContent: 'flex-start',
     // flexDirection:'row'
 
