@@ -5,28 +5,31 @@ import Today from './eventsComponents/today';
 import NextTomorrow from './eventsComponents/next-tomorrow';
 import Others from './eventsComponents/others';
 import Schedule from './eventsComponents/schedule';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createMaterialTopTabNavigator();
+const stack = createNativeStackNavigator()
 
 export default function Events() {
   return (
-    <Tab.Navigator initialRouteName='Today' 
+    <stack.Navigator initialRouteName='Today'
+    screenOptions={{headerShown:false}}  
     
-    screenOptions={{
-      tabBarShowLabel:true,
-        tabBarLabelStyle:{fontSize:8,color:'black'},
-        tabBarStyle:{borderBottomWidth:0,elevation:0, backgroundColor:'white'},
-        // tabBarActiveTintColor:"gray",
-        tabBarIndicatorStyle:{
-        backgroundColor:'gray',
+    // screenOptions={{
+    //   tabBarShowLabel:true,
+    //     tabBarLabelStyle:{fontSize:8,color:'black'},
+    //     tabBarStyle:{borderBottomWidth:0,elevation:0, backgroundColor:'white'},
+    //     // tabBarActiveTintColor:"gray",
+    //     tabBarIndicatorStyle:{
+    //     backgroundColor:'gray',
 
-        }
-    }}>
-        <Tab.Screen name='Today' component={Today} />
-        <Tab.Screen name='Schedule' component={Schedule} />
+    //     }
+    // }}
+    >
+        <stack.Screen name='Today' component={Today}/>
+        <stack.Screen name='Schedule' component={Schedule} />
         {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
         {/* <Tab.Screen name='Others' component={Others} /> */}
-    </Tab.Navigator>
+    </stack.Navigator>
   )
 }

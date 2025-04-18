@@ -102,7 +102,12 @@ function Navigation() {
         if (!is_loggedIn) {
             return (
 
-               
+                <KeyboardAvoidingView
+
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+            >
+                
                     <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="auth">
 
 
@@ -110,27 +115,33 @@ function Navigation() {
                         <stack.Screen component={LoginView} name="login" />
                         <stack.Screen component={SignupView} name="signup" />
                         <stack.Screen component={IndexView} name="index" />
-                        <stack.Screen component={Mapscreen} name="Mapscreen" />
+                        <stack.Screen component={Mapscreen} name="MapScreen" />
 
 
 
                     </stack.Navigator>
+                    </KeyboardAvoidingView>
             )
 
         } else {
             return (
 
-              
+                <KeyboardAvoidingView
+
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+            >
                     <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="index">
 
 
 
                         <stack.Screen component={IndexView} name="index"  />
-                        <stack.Screen component={Mapscreen} name="Mapscreen" />
+                        <stack.Screen component={Mapscreen} name="MapScreen" />
                        
 
                     </stack.Navigator>
                     
+                    </KeyboardAvoidingView>
             )
 
         }

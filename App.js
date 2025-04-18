@@ -10,9 +10,11 @@ import { registerRootComponent } from 'expo';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { PaperProvider } from 'react-native-paper';
+import { LogBox } from 'react-native';
 
 
 export default function App() {
+  LogBox.ignoreAllLogs()
   return (
 
 

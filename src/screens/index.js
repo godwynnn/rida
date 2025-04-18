@@ -1,12 +1,13 @@
 import 'react-native-get-random-values'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef,useState } from 'react'
 import { Text, View, StyleSheet, SafeAreaView, StatusBar, FlatList, ScrollView, Platform,TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SelectAccessToken, SelectRefreshToken, SelectLoggedInStatus } from '../reducer/reducer'
 
 import { TextInput } from 'react-native-paper'
 import Events from '../components/events'
+import Today from '../components/eventsComponents/today'
 import { GOOGLE_API_KEY } from '@env'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import tailwind from 'twrnc'
@@ -21,6 +22,9 @@ import { getItem } from '../../utils/asyncStorage'
 import Svg, { Path } from 'react-native-svg';
 import { Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
+import { ImageBackground } from 'react-native'
+import * as Location from 'expo-location';
+import axios from 'axios'
 
 
 
@@ -28,6 +32,8 @@ import { Ionicons } from '@expo/vector-icons'
 
 function IndexView({ navigation }) {
 
+
+  const [errorMsg, setErrorMsg] = useState(null);
   let u_data = useSelector(async (state) => await state.authreducer)
   const {width,height}=Dimensions.get('screen')
   const stored_data = u_data
@@ -35,6 +41,7 @@ function IndexView({ navigation }) {
   const tw = tailwind
   // console.log(GOOGLE_API_KEY)
   const modalRef = useRef(null);
+  const PickUpRef=useRef(null)
   const openModal = () => modalRef.current?.open();
   const auth_access_token = getItem('auth_access_token')
   const auth_refresh_token = getItem('auth_refresh_token')
@@ -50,27 +57,80 @@ function IndexView({ navigation }) {
 
   const dispatch = useDispatch()
 
+
+
+
+  // // CURRENT LOCATION
+  useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const {latitude,longitude}=location.coords
+      // console.log(location)
+      
+
+      
+      try {
+        
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${GOOGLE_API_KEY}`)
+                .then(res=>res.json()).then((data)=>{
+    
+        
+        const address = data['results'][0].formatted_address;
+        
+        // console.log( address );
+        dispatch(LocationAction.setOrigin({
+          'origin': {'lat':latitude,'lng':longitude},
+          'origin_desc': address
+        }))
+        dispatch(LocationAction.setDestination({ 'destination': null, 'destination_desc': null }))
+
+        setTimeout(() => {
+          PickUpRef.current?.setAddressText(address)
+        }, 500); // Slight delay ensures component is mounted
+        
+        })
+        
+      } catch (error) {
+        console.warn(error.message);
+      }
+    })();
+  },[]);
+
+
+
+
   return (
 
 
     <SafeAreaView style={styles.container}>
+      {/* <ImageBackground style={[tw`flex-1`]}  resizeMode="cover" source={{uri:'https://res.cloudinary.com/dtt4nxboi/image/upload/v1744834436/map_523_w2l9h8.png'}}> */}
 
 
-      <View style={[tw`bg-[#1D1A38] flex-0.2 p-4 pt-5 `, { zIndex: 10 }]}>
+      <View style={[tw` flex-0.25 p-4 pt-5 bg-[#1D1A38]`, { zIndex: 10, borderBottomRightRadius:40, borderBottomLeftRadius:40 }]}>
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
+          ref={PickUpRef}
           // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
           // currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch'
           listViewDisplayed={true}
           fetchDetails={true}
 
+          
+          
           styles={{
             textInput: { fontSize: 15, height: '100%' },
-            container: { flex: 1,elevation:10,position:'absolute',
-              top:2,left:0,width:width,zIndex: 9999,paddingHorizontal:10 },
-            textInputContainer: { marginTop: 60, height: 60,opacity:0.9, borderRadius:50, borderWidth:0},
+            container: {flex: 1,elevation:10,position:'absolute',
+              top:20,left:0,width:width,zIndex: 9999,paddingHorizontal:10 },
+            textInputContainer: { marginTop: 60, height: 50,opacity:0.9, borderRadius:50, borderWidth:0,backgroundColor:'transpaent'},
             listView:{  zIndex: 9999,elevation: 10, }
             
           }}
@@ -98,6 +158,7 @@ function IndexView({ navigation }) {
 
 
 
+
         />
         {/* <Svg
          height="70%"
@@ -121,7 +182,7 @@ function IndexView({ navigation }) {
       
 
      
-     
+      {/* </ImageBackground> */}
 
     </SafeAreaView>
 

@@ -15,7 +15,7 @@ const feature_data = [
     title: 'Ride',
     image: 'car',
     id: 0,
-    next_screen: 'Mapscreen',
+    next_screen: 'MapScreen',
     service: 'RIDE'
   },
 
@@ -48,7 +48,8 @@ const favourite_data=[
     icon:'home',
     title:'Home',
     info:'Add a home address',
-    id:0
+    id:0,
+    
   },
 
   {
@@ -67,22 +68,25 @@ export default function Today({ navigation }) {
 
 
   const gotoMapScreen = (screen) => {
-    navigation.navigate(screen)
+      navigation.navigate(screen)
 
   }
 
 
   const setService = (value) => {
+   
     console.log('SERVICE', value.service)
     gotoMapScreen(value.next_screen)
   }
 
 
   return (
-    <SafeAreaView style={{ height: '100%', backgroundColor: 'white' }} >
+    <SafeAreaView style={{ height: '100%', backgroundColor: 'white'}} >
 
       <View style={{
-        height:'30%'
+        height:'35%',
+       
+        
       }}>
         <FlatList
           data={feature_data}
@@ -198,13 +202,14 @@ export default function Today({ navigation }) {
 const styles = StyleSheet.create({
   container: {
 
-    backgroundColor: 'white',
+    
+    bordertop:'50%',
     // flex: 1,
     // width: width,
-    height: width * 0.9,
+    height: '100%',
     paddingTop: '8%',
     paddingHorizontal: 10,
-    flexGrow:1,
+    // flexGrow:1,
     alignContent: 'flex-start',
     // flexDirection:'row'
 

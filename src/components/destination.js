@@ -47,6 +47,7 @@ function Destination({navigation}) {
             </View>
 
             <View style={[{ flex: 1,justifyContent:'space-between' }, tw`p-4 bg-white`]}>
+              
                 <GooglePlacesAutocomplete
                     placeholder='Where are you going to?'
                     // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
