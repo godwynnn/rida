@@ -37,7 +37,7 @@ const intervals = [
   { label: 'weeks', value: 'w' },
 ]
 
-export default function Schedule() {
+export default function Events() {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const tw = tailwind

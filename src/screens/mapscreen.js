@@ -143,9 +143,9 @@ function Mapscreen({navigation}) {
       
      
 
-      <Button icon={"home"} onPress={() => navigation.navigate('index')}  labelStyle={{ fontSize: 30,alignSelf:'center' }}
+      <Button icon={"home"} onPress={() => navigation.navigate('index')}  labelStyle={{ fontSize: 25,alignSelf:'center',color:'#191C25' }}
       contentStyle={{justifyContent:'space-around', flexDirection:'row', padding:10}}
-      style={[tw`bg-[#ECEEE9] w-[8%] h-[60px] rounded-[50px] absolute z-1000 top-[5%] left-3 flex`]}  />
+      style={[tw`bg-[#ECEEE9] w-[6%] h-[60px] rounded-[50px] absolute z-1000 top-[5%] left-3 flex`]}  />
 
       <MapView
         ref={mapRef}

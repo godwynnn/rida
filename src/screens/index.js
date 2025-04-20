@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { SelectAccessToken, SelectRefreshToken, SelectLoggedInStatus } from '../reducer/reducer'
 
 import { TextInput } from 'react-native-paper'
-import Events from '../components/events'
+import EventsDriveStack from '../components/events'
 import Today from '../components/eventsComponents/today'
 import { GOOGLE_API_KEY } from '@env'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -110,99 +110,22 @@ function IndexView({ navigation }) {
 
 
     <SafeAreaView style={styles.container}>
-      {/* <ImageBackground style={[tw`flex-1`]}  resizeMode="cover" source={{uri:'https://res.cloudinary.com/dtt4nxboi/image/upload/v1744834436/map_523_w2l9h8.png'}}> */}
-
-
-      <View style={[tw` flex-0.25 p-4 pt-5 bg-[#1D1A38]`, { zIndex: 10, borderBottomRightRadius: 40, borderBottomLeftRadius: 40 }]}>
-
-        <GooglePlacesAutocomplete
-          placeholder='Select Pickup point?'
-          ref={PickUpRef}
-          // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-          // currentLocationLabel="Current location"
-          nearbyPlacesAPI='GooglePlacesSearch'
-          listViewDisplayed={true}
-          fetchDetails={true}
-         
-
-          renderRightButton={() => (
-            <TouchableOpacity
-              onPress={() => PickUpRef.current?.clear()}
-              style={{ padding: 15}}
-            >
-              <Text style={{ fontSize: 12,
-                  fontWeight:'bold',color:'white'
-                 }}>✕</Text>
-            </TouchableOpacity>
-          )}
-
-          renderLeftButton={()=>(
-            <View style={{width:'10%', display:'flex', justifyContent:"center",alignItems:'center'}}>
-            <Button icon='map-marker'  />
-
+      <StatusBar barStyle={'light-content'}  translucent backgroundColor="transparent" />
+      
+      <View style={[tw` flex-0.06 p-1 pt-5 `, { zIndex: 10, backgroundColor:'transparent'}]}>
+            
+                    
+            
             </View>
-  )}
 
 
-          styles={{
-            textInput: { fontSize: 15, height: '100%' },
-            container: {
-              flex: 1, elevation: 10, position: 'absolute',
-              top: 20, left: 0, width: width, zIndex: 9999, paddingHorizontal: 10
-            },
-            textInputContainer: { marginTop: 60, height: 50, opacity: 0.9, borderRadius: 10, borderWidth: 0, backgroundColor:'white' },
-            listView: { zIndex: 9999, elevation: 10, }
-
-          }}
-          minLength={1}
-          debounce={100}
-          query={{
-            key: GOOGLE_API_KEY,
-            language: 'en',
-
-          }}
-
-          onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-            // console.log('DATA',data);
-            // console.log('DETAILS',details);
-
-            dispatch(LocationAction.setOrigin({
-              'origin': details.geometry.location,
-              'origin_desc': data.description
-            }))
-            dispatch(LocationAction.setDestination({ 'destination': null, 'destination_desc': null }))
-
-          }}
-          enablePoweredByContainer={false}
-
-
-
-
-
-        />
-        {/* <Svg
-         height="70%"
-         width={width}
-         viewBox="0 0 1440 320"
-         style={{ position: 'absolute', top: '70%', left:'0' }}
-        >
-          <Path
-          fill={'#fff'}
-          d="M0,192L80,192C160,192,320,192,480,208C640,224,800,256,960,261.3C1120,267,1280,245,1360,234.7L1440,224L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-          
-          />
-        </Svg> */}
-
-
-      </View>
-
-      <View style={[tw`flex-0.8`, { zIndex: -1 }]}>
-        <Events />
+      <View style={[tw`flex-1 `, { zIndex: -1,backgroundColor:'transparent'  }]}>
+        <EventsDriveStack />
       </View>
 
 
 
-      {/* </ImageBackground> */}
+
 
     </SafeAreaView>
 
@@ -212,7 +135,7 @@ export default IndexView
 
 styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#191C25',
     flex: 1,
     paddingTop: Platform.OS === 'android' ? '0' : '0',
     // justifyContent: 'space-between',
