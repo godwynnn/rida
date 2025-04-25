@@ -120,7 +120,7 @@ function IndexView({ navigation }) {
 
 
       <View style={[tw`flex-1 `, { zIndex: -1,backgroundColor:'transparent'  }]}>
-        <EventsDriveStack />
+        <EventsDriveStack PickUpRef={PickUpRef} />
       </View>
 
 

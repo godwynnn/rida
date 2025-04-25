@@ -66,11 +66,9 @@ const favourite_data = [
 
 
 
-export default function Drive({ navigation }) {
+export default function Drive({ route,navigation }) {
   const tw = tailwind
   const LocationData = useSelector(selectTripData)
-  const PickUpRef = useRef(null)
-
 
   const gotoMapScreen = (screen) => {
     navigation.navigate(screen)
@@ -106,7 +104,7 @@ export default function Drive({ navigation }) {
 
         <GooglePlacesAutocomplete
           placeholder='Select Pickup point?'
-          ref={PickUpRef}
+          ref={route.params.PickUpRef}
           // currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
           // currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch'
@@ -117,7 +115,7 @@ export default function Drive({ navigation }) {
           renderRightButton={() => (
             <View style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5, padding: 15, width: 40, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
               <TouchableOpacity
-                onPress={() => PickUpRef.current?.clear()}
+                onPress={() => route.params.PickUpRef.current?.clear()}
                 style={{ backgroundColor: '#DFDFDF', width: 20, padding: 2, borderRadius: 60 }}
 
               >

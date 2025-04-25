@@ -36,6 +36,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
               alignItems: 'center',
               borderRadius: 10,
             }}
+
           >
             <Text style={{ color: isFocused ? '#000' : '#666', fontWeight: '600' }}>
               {descriptors[route.key].options.title || route.name}
@@ -50,23 +51,28 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
 
 
-export default function EventsDriveStack() {
+export default function EventsDriveStack(props) {
+  
   return (
     <Tab.Navigator initialRouteName='Today'
-    tabBar={(props) => <CustomTabBar {...props} />}
+  
+    tabBar={(props) => <CustomTabBar {...props}
+      />}
     screenOptions={{ swipeEnabled: true,
        tabBarStyle:{
         elevation:0,
         backgroundColor:'transparent',
-        shadowOpacity: 0,
-        borderBottomWidth: 0,
+        shadowColor:'transparent'
        },
-       
+       tabBarContentContainerStyle:{
+        backgroundColor:'transparent',
+      
+       },
        
       }}
     
     >
-        <Tab.Screen name='Drive' component={Drive} />
+        <Tab.Screen name='Drive' component={Drive} initialParams={{PickUpRef:props.PickUpRef}} />
         <Tab.Screen name='Events' component={Events} />
         {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
         {/* <Tab.Screen name='Others' component={Others} /> */}
