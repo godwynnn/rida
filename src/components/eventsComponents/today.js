@@ -69,6 +69,7 @@ const favourite_data = [
 export default function Drive({ route,navigation }) {
   const tw = tailwind
   const LocationData = useSelector(selectTripData)
+  const dispatch = useDispatch()
 
   const gotoMapScreen = (screen) => {
     navigation.navigate(screen)
@@ -84,9 +85,6 @@ export default function Drive({ route,navigation }) {
 
 
   return (
-
-
-
 
 
 

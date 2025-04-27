@@ -14,13 +14,18 @@ const stack = createNativeStackNavigator()
 // Custom Tab Bar to mimic the toggle style
 function CustomTabBar({ state, descriptors, navigation }) {
   return (
-    <View style={{
+    <View
+    
+    
+    style={{
       flexDirection: 'row',
-      backgroundColor: '#e9edc9',
+        backgroundColor: 'rgba(0,0,0,1)',
       borderRadius: 10,
       marginHorizontal: 100,
       marginBottom: 10,
       overflow: 'hidden',
+
+
     }}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
@@ -56,18 +61,17 @@ export default function EventsDriveStack(props) {
   return (
     <Tab.Navigator initialRouteName='Today'
   
-    tabBar={(props) => <CustomTabBar {...props}
-      />}
+    tabBar={(props) => <CustomTabBar {...props}/>}
     screenOptions={{ swipeEnabled: true,
        tabBarStyle:{
         elevation:0,
-        backgroundColor:'transparent',
-        shadowColor:'transparent'
+        backgroundColor: 'rgba(0,0,0,0)',
+        shadowColor:'transparent',
+        borderTopRightRadius:20
        },
-       tabBarContentContainerStyle:{
-        backgroundColor:'transparent',
-      
-       },
+       
+       
+       
        
       }}
     

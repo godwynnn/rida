@@ -37,3 +37,7 @@ yarn-error.*
 #os
 /android
 /ios
+
+# Environmental variables
+.env
+/.env

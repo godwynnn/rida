@@ -119,7 +119,7 @@ function IndexView({ navigation }) {
             </View>
 
 
-      <View style={[tw`flex-1 `, { zIndex: -1,backgroundColor:'transparent'  }]}>
+      <View style={[tw`flex-1 `, { backgroundColor:'transparent'  }]}>
         <EventsDriveStack PickUpRef={PickUpRef} />
       </View>
 
@@ -142,8 +142,6 @@ styles = StyleSheet.create({
 
 
   },
-  sub_container: {
-    flex: 0.8,
-  }
+ 
 })
 
