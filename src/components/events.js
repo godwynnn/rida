@@ -60,8 +60,10 @@ export default function EventsDriveStack(props) {
   
   return (
     <Tab.Navigator initialRouteName='Today'
-  
+    
+    
     tabBar={(props) => <CustomTabBar {...props}/>}
+    sceneContainerStyle={{backgroundColor:'transparent'}}
     screenOptions={{ swipeEnabled: true,
        tabBarStyle:{
         elevation:0,

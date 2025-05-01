@@ -42,26 +42,12 @@ export default function Events() {
   const [selectedItems, setSelectedItems] = useState([]);
   const tw = tailwind
   return (
-    <SafeAreaView style={[styles.container, { display: 'flex'}]}>
+    <SafeAreaView style={{ height: '100%', backgroundColor: 'white', borderTopLeftRadius: 30, paddingTop: 0, borderTopRightRadius: 30 }}>
 
-      <View style={[{ flex: 1 }, tw`pl-10 pr-10 pt-4 flex gap-2`]}>
-
-      
+      <View style={[{ flex: 1 }, tw`pl-10 pr-10 pt-4 flex gap-2 flex flex-col justify-center items-center`]}>
 
 
-      <RNPickerSelect
-          onValueChange={(value) => console.log(value)}
-          style={{ fontSize: 5,width:'100%', height:10}}
-          items={intervals}
-          
-          // key={({item})=>item.id}
-        />
-
-
-<TextInput
-          style={tw`w-[100%] h-10`}
-          placeholder='Enter Duration'
-        />
+            <Text style={tw``}>Events</Text>
         
 
 
@@ -71,33 +57,7 @@ export default function Events() {
       </View>
 
 
-      <FlatList
-        data={feature_data}
-        contentContainerStyle={[styles.container,tw`flex-row`]}
-
-
-
-        keyExtractor={(item, index) => item.id}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity  >
-              <View style={{
-                width: 130, height: 130, backgroundColor: 'whitesmoke', margin: 4,
-                justifyContent: 'center', alignItems: 'center'
-              }} >
-
-                <Image source={item.image} style={{ width: 50, height: 50 }} />
-                <Text style={{ fontSize: 15, marginTop: 10 }}>{item.title}</Text>
-
-
-              </View>
-
-
-
-
-            </TouchableOpacity>)
-        }}
-      />
+      
 
     </SafeAreaView>
   )
