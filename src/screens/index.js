@@ -27,6 +27,10 @@ import * as Location from 'expo-location';
 import axios from 'axios'
 import { Button } from 'react-native-paper'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Profile from '../components/profile'
+import Notification from '../components/notification'
+import Activity from '../components/activity'
+
 
 const BottomTab = createBottomTabNavigator();
 
@@ -48,20 +52,27 @@ export const TabIndexView=({navigation})=>{
           else if(route.name === 'Profile'){
             iconName=focused?'person-circle':'person-circle-outline'
           }
-          return <Ionicons name={iconName} color={'black'} size={size}/>
+          return <Ionicons name={iconName} color={'#191C25'} size={size}/>
         },
         headerShown:false,
-     tabBarStyle:{backgroundColor:'white', },
-      tabBarShowLabel:false
+     tabBarStyle:{backgroundColor:'white', height:60, 
+      marginVertical:5, marginHorizontal:10, borderRadius:10
+    },
+      tabBarShowLabel:false,
+      
+     
 
       })
     } 
+   
+    sceneContainerStyle={{backgroundColor:'transparent'}}
+    
      
      >
     <BottomTab.Screen name="Home" component={IndexView} />
-    <BottomTab.Screen name="Activity" component={IndexView} />
-    <BottomTab.Screen name="Notification" component={IndexView} />
-    <BottomTab.Screen name="Profile" component={IndexView} />
+    <BottomTab.Screen name="Activity" component={Activity} />
+    <BottomTab.Screen name="Notification" component={Notification} />
+    <BottomTab.Screen name="Profile" component={Profile} />
   </BottomTab.Navigator>
   )
 }
