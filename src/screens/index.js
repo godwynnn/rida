@@ -37,6 +37,8 @@ const BottomTab = createBottomTabNavigator();
 
 export const TabIndexView=({navigation})=>{
 
+  const tw =tailwind
+
   return(
     <BottomTab.Navigator screenOptions={
       ({route,navigation})=>({
@@ -52,25 +54,54 @@ export const TabIndexView=({navigation})=>{
           else if(route.name === 'Profile'){
             iconName=focused?'person-circle':'person-circle-outline'
           }
+
+          else if(route.name === 'Locate'){
+            return(<View style={{
+              position:'absolute',
+              bottom:25,
+              backgroundColor:'#191C25',
+              width:70,
+              display:'flex',
+              justifyContent:'center',
+              alignItems:'center',
+              height:70,
+              elevation:0,
+              borderWidth:1,
+              borderBottomWidth:0,
+              borderRadius:50,
+              // borderBottomRightRadius:20,
+              // borderBottomLeftRadius:20,
+              borderColor:'whitesmoke'
+              
+              
+            }}>
+                {focused?
+                <Ionicons name='locate' color={'white'} size={25}/>:
+                <Ionicons name='locate-outline' color={'white'} size={25}/>
+                }
+
+            </View>)
+
+          }
           return <Ionicons name={iconName} color={'#191C25'} size={size}/>
         },
         headerShown:false,
      tabBarStyle:{backgroundColor:'white', height:60, 
       marginVertical:5, marginHorizontal:10, borderRadius:10
     },
+    
       tabBarShowLabel:false,
       
-     
+    
 
       })
     } 
-   
-    sceneContainerStyle={{backgroundColor:'transparent'}}
     
      
      >
     <BottomTab.Screen name="Home" component={IndexView} />
     <BottomTab.Screen name="Activity" component={Activity} />
+    <BottomTab.Screen name="Locate" component={Notification} />
     <BottomTab.Screen name="Notification" component={Notification} />
     <BottomTab.Screen name="Profile" component={Profile} />
   </BottomTab.Navigator>
