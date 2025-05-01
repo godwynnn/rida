@@ -51,9 +51,7 @@ export default function Events() {
         
 
 
-        
-
-
+      
       </View>
 
 

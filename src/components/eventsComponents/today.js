@@ -66,7 +66,7 @@ const favourite_data = [
 
 
 
-export default function Drive({ route,navigation }) {
+export default function Drive({ route, navigation }) {
   const tw = tailwind
   const LocationData = useSelector(selectTripData)
   const dispatch = useDispatch()
@@ -177,131 +177,131 @@ export default function Drive({ route,navigation }) {
 
 
 
-<ScrollView nestedScrollEnabled={true}
-style={{height:'90%'}}
-showsVerticalScrollIndicator={false}
->
+      <ScrollView nestedScrollEnabled={true}
+        style={{ height: '90%' }}
+        showsVerticalScrollIndicator={false}
+      >
 
 
-      {/* FEATURES */}
+        {/* FEATURES */}
 
-      <View style={{
-        height: '25%',
-
-
-      }}>
-        <FlatList
-          data={feature_data}
-          contentContainerStyle={styles.container}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          legacyImplementation={false}
-          scrollEnabled={false}
+        <View style={{
+          height: '25%',
 
 
-
-          keyExtractor={(item, index) => item.id}
-
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity onPress={() => setService(item)} disabled={!LocationData.origin}>
-                <View style={[{
-                  width: 100, height: 100, backgroundColor: 'whitesmoke', margin: 4,
-                  justifyContent: 'center', alignItems: 'center', borderRadius: 20,
-                }, tw`${!LocationData.origin && 'opacity-30'} `]}
-
-                >
-
-                  <Ionicons name={item.image} size={35} color={'#1D1A38'} />
-                  <Text style={{ fontSize: 15, marginTop: 10 }}>{item.title}</Text>
-
-
-                </View>
+        }}>
+          <FlatList
+            data={feature_data}
+            contentContainerStyle={styles.container}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            legacyImplementation={false}
+            scrollEnabled={false}
 
 
 
+            keyExtractor={(item, index) => item.id}
+
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity onPress={() => setService(item)} disabled={!LocationData.origin}>
+                  <View style={[{
+                    width: 100, height: 100, backgroundColor: 'whitesmoke', margin: 4,
+                    justifyContent: 'center', alignItems: 'center', borderRadius: 20,
+                  }, tw`${!LocationData.origin && 'opacity-30'} `]}
+
+                  >
+
+                    <Ionicons name={item.image} size={35} color={'#1D1A38'} />
+                    <Text style={{ fontSize: 15, marginTop: 10 }}>{item.title}</Text>
 
 
-              </TouchableOpacity>)
-          }}
-        />
-      </View>
-
-
-      <View style={[tw`p-0 px-4 h-40`, { gap: 10 }]}>
-
-
-
-
-
-        {/* FAVOURITE */}
-        <Text style={tw`font-500 text-[15px]`}> Favourite</Text>
-
-        <FlatList
-          data={favourite_data}
-          contentContainerStyle={{ gap: 10 }}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTap='handled'
-          scrollEnabled={false}
-
-          
-          keyExtractor={(item, index) => item.id}
-
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity style={[tw`bg-[whitesmoke]  px-5 flex-row h-15`, { alignItems: 'center', borderRadius: 10, justifyContent: 'space-between' }]}>
-
-
-                <View style={[tw`flex-row`, { gap: 20, justifyContent: 'center', alignItems: 'center' }]}>
-                  <Ionicons name={item.icon} size={25} color={'#1D1A38'} />
-                  <View>
-                    <Text style={[tw`text-[16px]`, { fontWeight: 'bold', }]}>{item.title}</Text>
-                    <Text>{item.info}</Text>
                   </View>
 
-                </View>
-
-                <View>
-                  <Ionicons name='arrow-forward' size={20} color={'#1D1A38'} />
-                </View>
-
-
-              </TouchableOpacity>
-            )
-          }}
-        />
 
 
 
-      </View>
+
+                </TouchableOpacity>)
+            }}
+          />
+        </View>
 
 
-      <View style={[tw` h-100 p-4 pt-0 `, {}]}>
+        <View style={[tw`p-0 px-4 h-40`, { gap: 10 }]}>
 
 
-        <View style={[tw`bg-[#191C25] h-[40%]  mt-10 `, { borderRadius: 20, position: 'relative' }]}>
-          <Text style={tw`text-[#fff] font-700 text-xl mt-5 ml-2`}>Schedule Your Ride</Text>
-          <Text style={tw`text-[#fff] font-400 text-[12px] mt-1 ml-2`}> Plan ahead, ride stress-free</Text>
-          <Text style={tw`text-[#fff] font-400 text-[12px] mt-1 ml-2`}> Schedule your ride now!</Text>
-
-          <TouchableOpacity style={[tw`bg-[whitesmoke] w-[30%] mt-2 ml-2  h-[25%] flex`, { alignItems: 'center', borderRadius: 10, justifyContent: 'center' }]}>
 
 
-            <Text style={tw`text-[#1D1A38] font-500 text-[12px] text-center`}> Let's go!</Text>
 
-          </TouchableOpacity>
+          {/* FAVOURITE */}
+          <Text style={tw`font-500 text-[15px]`}> Favourite</Text>
+
+          <FlatList
+            data={favourite_data}
+            contentContainerStyle={{ gap: 10 }}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTap='handled'
+            scrollEnabled={false}
 
 
-          <Image source={require('../../../assets/ft1.png')}
-            resizeMode="contain" style={{ width: '80%', height: '100%', position: 'absolute', right: -50 }} />
+            keyExtractor={(item, index) => item.id}
 
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity style={[tw`bg-[whitesmoke]  px-5 flex-row h-15`, { alignItems: 'center', borderRadius: 10, justifyContent: 'space-between' }]}>
+
+
+                  <View style={[tw`flex-row`, { gap: 20, justifyContent: 'center', alignItems: 'center' }]}>
+                    <Ionicons name={item.icon} size={25} color={'#1D1A38'} />
+                    <View>
+                      <Text style={[tw`text-[16px]`, { fontWeight: 'bold', }]}>{item.title}</Text>
+                      <Text>{item.info}</Text>
+                    </View>
+
+                  </View>
+
+                  <View>
+                    <Ionicons name='arrow-forward' size={20} color={'#1D1A38'} />
+                  </View>
+
+
+                </TouchableOpacity>
+              )
+            }}
+          />
 
 
 
         </View>
 
 
-      </View>
+        <View style={[tw` h-100 p-4 pt-0 `, {}]}>
+
+
+          <View style={[tw`bg-[#191C25] h-[40%]  mt-10 `, { borderRadius: 20, position: 'relative' }]}>
+            <Text style={tw`text-[#fff] font-700 text-xl mt-5 ml-2`}>Schedule Your Ride</Text>
+            <Text style={tw`text-[#fff] font-400 text-[12px] mt-1 ml-2`}> Plan ahead, ride stress-free</Text>
+            <Text style={tw`text-[#fff] font-400 text-[12px] mt-1 ml-2`}> Schedule your ride now!</Text>
+
+            <TouchableOpacity style={[tw`bg-[whitesmoke] w-[30%] mt-2 ml-2  h-[25%] flex`, { alignItems: 'center', borderRadius: 10, justifyContent: 'center' }]}>
+
+
+              <Text style={tw`text-[#1D1A38] font-500 text-[12px] text-center`}> Let's go!</Text>
+
+            </TouchableOpacity>
+
+
+            <Image source={require('../../../assets/ft1.png')}
+              resizeMode="contain" style={{ width: '80%', height: '100%', position: 'absolute', right: -50 }} />
+
+
+
+
+          </View>
+
+
+        </View>
 
       </ScrollView>
     </View>

@@ -11,6 +11,7 @@ import Mapscreen from "./screens/mapscreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Destination from "./components/destination";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { TabIndexView } from "./screens";
 
 
 
@@ -92,7 +93,7 @@ function Navigation() {
                     <stack.Screen component={Authentication} name="auth" />
                     <stack.Screen component={LoginView} name="login" />
                     <stack.Screen component={SignupView} name="signup" />
-                    <stack.Screen component={IndexView} name="index" />
+                    <stack.Screen component={TabIndexView} name="index" />
                     <stack.Screen component={Mapscreen} name="MapScreen" />
 
                 </stack.Navigator>
@@ -114,7 +115,7 @@ function Navigation() {
                         <stack.Screen component={Authentication} name="auth" />
                         <stack.Screen component={LoginView} name="login" />
                         <stack.Screen component={SignupView} name="signup" />
-                        <stack.Screen component={IndexView} name="index" />
+                        <stack.Screen component={TabIndexView} name="index" />
                         <stack.Screen component={Mapscreen} name="MapScreen" />
 
 
@@ -135,7 +136,7 @@ function Navigation() {
 
 
 
-                        <stack.Screen component={IndexView} name="index"  />
+                        <stack.Screen component={TabIndexView} name="index"  />
                         <stack.Screen component={Mapscreen} name="MapScreen" />
                        
 
