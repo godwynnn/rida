@@ -123,7 +123,11 @@ function Mapscreen({navigation}) {
   }, [LocationData.origin, LocationData.destination, mapRef])
 
 
+const UserLocation=(location)=>{
+const {latitude,longitude}=location.nativeEvent.coordinate
+// console.log('Inside mapscreen',latitude)
 
+}
 
 
 
@@ -131,6 +135,7 @@ function Mapscreen({navigation}) {
   const handleSheetChanges = useCallback((index) => {
     console.log("handleSheetChanges", index);
   }, []);
+
 
 
 
@@ -157,6 +162,8 @@ function Mapscreen({navigation}) {
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
         }}
+        showsUserLocation={LocationData.enableTracker}
+        onUserLocationChange={UserLocation}
       // onMapReady={fitMapToScreen}
 
 
@@ -173,6 +180,7 @@ function Mapscreen({navigation}) {
             description={LocationData.origin.origin_desc}
             identifier='origin'
             rotation={10.0}
+            draggable
           />
 
         }
@@ -188,6 +196,7 @@ function Mapscreen({navigation}) {
             description={LocationData.destination.destination_desc}
             identifier='destination'
             rotation={10.0}
+            draggable
           />
         )
 

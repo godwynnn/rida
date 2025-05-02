@@ -67,7 +67,9 @@ const LocationState={
     data:null,
     service:null,
     schedule:{},
-    map_ready:false
+    map_ready:false,
+    showTrackerModal:false,
+    enableTracker:false,
     
 
     // 'schedule_timestamp':null
@@ -92,6 +94,11 @@ export const LocationSlice=createSlice({
         },
         setSchedule:(state,action)=>{
             state.schedule=action.payload
+        },
+        setTracker:(state,action)=>{
+            state.showTrackerModal=action.payload.showTrackerModal
+            state.enableTracker=action.payload.enableTracker
+            // console.log(action.payload)
         }
     }
 })
