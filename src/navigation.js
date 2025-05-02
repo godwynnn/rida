@@ -64,7 +64,7 @@ function Navigation() {
     }
 
 
-    // console.warn('LOGGED IN ', is_loggedIn)
+    console.warn('LOGGED IN ', is_loggedIn)
 
 
     useEffect(() => {

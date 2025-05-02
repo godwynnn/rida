@@ -60,7 +60,20 @@ export const TabIndexView = ({ navigation }) => {
 
           else if (route.name === 'Locate') {
             return (<TouchableOpacity
-              onPress={() => dispatch(LocationAction.setTracker({...LocationData, showTrackerModal: true }))}
+              onPress={async() =>{
+                let { status } = await Location.requestForegroundPermissionsAsync();
+                console.log(status)
+                  if (status !== 'granted') {
+                    setErrorMsg('Permission to access location was denied');
+                    return;
+                  }else{
+                    dispatch(LocationAction.setTracker({...LocationData, showTrackerModal: true }))
+                  }
+                  
+                
+                
+                }
+                }
 
               style={{
                 position: 'absolute',
@@ -116,9 +129,10 @@ export const TabIndexView = ({ navigation }) => {
 
           }
         })}
-         >
-          {() => null}
-        </BottomTab.Screen>
+        component={IndexView}
+         />
+          
+        
       <BottomTab.Screen name="Notification" component={Notification} />
       <BottomTab.Screen name="Profile" component={Profile} />
     </BottomTab.Navigator>
@@ -206,15 +220,7 @@ function IndexView({ navigation }) {
 
 
 
-  // LOCATION TRACKER
-  const watchId = Location.watchPositionAsync(
-    (position) => {
-      // setLocation(position.coords);
-      console.log(position.coords)
-    },
-    (error) => console.error(error),
-    { enableHighAccuracy: true, distanceFilter: 10 }
-  );
+
 
   // Clear listener when component unmounts
   useEffect(() => {
@@ -232,7 +238,6 @@ function IndexView({ navigation }) {
 
 
   const hideModal = () => dispatch(LocationAction.setTracker({...LocationData, showTrackerModal: false }));
-  console.log('tracker',LocationData.enableTracker)
   return (
 
 
@@ -257,7 +262,7 @@ function IndexView({ navigation }) {
               :
               <TouchableOpacity  style={{ backgroundColor: '#191C25',  padding:10, paddingHorizontal:20, borderRadius:10  }}
               
-              onPress={()=>dispatch(LocationAction.setTracker({enableTracker:true}))}
+              onPress={()=>{dispatch(LocationAction.setTracker({enableTracker:true}))}}
               >
                 <Text style={{ textAlign: 'center',color:'white'  }}>Enable</Text>
 
