@@ -32,7 +32,6 @@ import Notification from '../components/notification'
 import Activity from '../components/activity'
 import { selectTripData } from '../reducer/reducer'
 
-
 const BottomTab = createBottomTabNavigator();
 
 
@@ -41,7 +40,7 @@ export const TabIndexView = ({ navigation }) => {
   const tw = tailwind
   const dispatch = useDispatch()
   const LocationData = useSelector(selectTripData)
-
+  
   return (
     <BottomTab.Navigator screenOptions={
       ({ route, navigation }) => ({
@@ -150,7 +149,7 @@ function IndexView({ navigation }) {
   let u_data = useSelector(async (state) => await state.authreducer)
   const { width, height } = Dimensions.get('screen')
   const stored_data = u_data
-  console.log('STORED_DATA', stored_data)
+  // console.log('STORED_DATA', stored_data)
   const tw = tailwind
   // console.log(GOOGLE_API_KEY)
   const modalRef = useRef(null);
@@ -160,12 +159,12 @@ function IndexView({ navigation }) {
   const auth_refresh_token = getItem('auth_refresh_token')
   const LocationData = useSelector(selectTripData)
 
-  console.log('ACCESS TOKEN ', auth_access_token)
+  // console.log('ACCESS TOKEN ', auth_access_token)
 
 
 
   useEffect(() => {
-    console.log('STORED_DATA', stored_data)
+    // console.log('STORED_DATA', stored_data)
     openModal()
   }, [])
 
@@ -235,6 +234,7 @@ function IndexView({ navigation }) {
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );
   }, []);
+
 
 
   const hideModal = () => dispatch(LocationAction.setTracker({...LocationData, showTrackerModal: false }));

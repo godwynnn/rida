@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { useContext, useRef, useEffect, useState } from "react";
+import React, { useContext, useRef, useEffect, useState, useLayoutEffect } from "react";
 import { Text, View,KeyboardAvoidingView, Platform } from "react-native";
 import { OnboardingView } from "./screens/onboarding"
 import { Authentication } from "./screens/auth"
@@ -36,7 +36,7 @@ function Navigation() {
 
 
     const [ShowOnboarded, setShowOnboarded] = useState(null);
-    const [is_loggedIn, setisLoggedIn] = useState(false)
+    const [is_loggedIn, setisLoggedIn] = useState(null)
 
 
 
@@ -55,6 +55,7 @@ function Navigation() {
 
     const checkIfUserIs_loggedIn = async () => {
         const logged_in = await getItem('logged_in');
+        console.log(logged_in)
 
         if (logged_in == 1) {
             setisLoggedIn(true)
@@ -67,10 +68,16 @@ function Navigation() {
     console.warn('LOGGED IN ', is_loggedIn)
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         checkIfUserOnboarded();
         checkIfUserIs_loggedIn();
     }, [])
+
+
+
+    if (is_loggedIn == null) {
+        return null
+    }
 
     if (ShowOnboarded == null) {
         return null

@@ -24,7 +24,7 @@ const feature_data = [
 
   {
     title: 'Delivery',
-    image: require('../../../assets/ft3.png'),
+    // image: require('../../../assets/ft3.png'),
     id: 2
   },
 

@@ -5,13 +5,13 @@
     "description": "A Ride booking app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo/rida_icon.png",
+    "icon": "./assets/splash.png",
     "userInterfaceStyle": "light",
  
     "splash": {
-      "image": "./assets/logo/4.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#191C25"
+      "image": "./assets/screen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "transparent"
     },
     "assetBundlePatterns": [
       "**/*"
