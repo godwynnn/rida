@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useContext, useRef, useEffect, useState, useLayoutEffect } from "react";
-import { Text, View,KeyboardAvoidingView, Platform } from "react-native";
+import { Text, View,KeyboardAvoidingView, Platform, SafeAreaView } from "react-native";
 import { OnboardingView } from "./screens/onboarding"
 import { Authentication } from "./screens/auth"
 import { LoginView } from "./screens/login";
@@ -12,8 +12,9 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Destination from "./components/destination";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { TabIndexView } from "./screens";
+import LottieView from 'lottie-react-native';
 
-
+import { Dimensions } from 'react-native';
 
 
 export function MyDrawer() {
@@ -31,12 +32,13 @@ export function MyDrawer() {
 
 function Navigation() {
     const stack = createNativeStackNavigator()
+    const {width,height}=Dimensions.get('screen')
 
 
 
 
     const [ShowOnboarded, setShowOnboarded] = useState(null);
-    const [is_loggedIn, setisLoggedIn] = useState(null)
+    const [is_loggedIn, setisLoggedIn] = useState(false)
 
 
 
@@ -56,11 +58,18 @@ function Navigation() {
     const checkIfUserIs_loggedIn = async () => {
         const logged_in = await getItem('logged_in');
         console.log(logged_in)
+        
 
         if (logged_in == 1) {
+           setTimeout(()=>{
             setisLoggedIn(true)
+           },4000)
+            
         } else {
+            
             setisLoggedIn(false)
+         
+            
         }
     }
 
@@ -75,14 +84,23 @@ function Navigation() {
 
 
 
-    if (is_loggedIn == null) {
-        return null
-    }
-
+    
+    
     if (ShowOnboarded == null) {
         return null
     }
 
+    if (is_loggedIn == false) {
+        return  (
+            <SafeAreaView  style={{display:'flex',flex:1,justifyContent:'center',alignItems:'center',backgroundColor: '#ffffff',}}>
+                <LottieView 
+                resizeMode={"contain"}
+                source={require('../assets/splash_screen.json')} autoPlay loop={false}
+                 style={{width:width,height:height}}  />
+
+            </SafeAreaView>
+    )
+    }
 
 
     if (ShowOnboarded) {

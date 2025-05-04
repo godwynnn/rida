@@ -5,13 +5,13 @@
     "description": "A Ride booking app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/splash.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
  
     "splash": {
       "image": "./assets/screen.png",
-      "resizeMode": "contain",
-      "backgroundColor": "transparent"
+      "resizeMode": "cover",
+      "backgroundColor": "#1D1A38'"
     },
     "assetBundlePatterns": [
       "**/*"
