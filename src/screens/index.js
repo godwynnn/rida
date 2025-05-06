@@ -29,9 +29,8 @@ import { Button } from 'react-native-paper'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Profile from '../components/profile'
 import Notification from '../components/notification'
-import Activity from '../components/activity'
 import { selectTripData } from '../reducer/reducer'
-
+import Wallet from '../components/wallet'
 const BottomTab = createBottomTabNavigator();
 
 
@@ -48,8 +47,8 @@ export const TabIndexView = ({ navigation }) => {
           let iconName
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline'
-          } else if (route.name === 'Activity') {
-            iconName = focused ? 'list-circle' : 'list-circle-outline'
+          } else if (route.name === 'Wallet') {
+            iconName = focused ? 'wallet' : 'wallet-outline'
           } else if (route.name === 'Notification') {
             iconName = focused ? 'notifications-circle' : 'notifications-circle-outline'
           }
@@ -119,7 +118,7 @@ export const TabIndexView = ({ navigation }) => {
 
     >
       <BottomTab.Screen name="Home" component={IndexView} />
-      <BottomTab.Screen name="Activity" component={Activity} />
+      <BottomTab.Screen name="Wallet" component={Wallet} />
       <BottomTab.Screen name="Locate"
         listeners={() => ({
           tabPress: (e) => {

@@ -38,8 +38,8 @@ const feature_data = [
   },
 
   {
-    title: 'Events',
-    image: 'calendar',
+    title: 'Activity',
+    image: 'list',
     id: 2,
     service: 'EVENT'
   },

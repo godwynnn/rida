@@ -59,7 +59,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
 export default function EventsDriveStack(props) {
   
   return (
-    <Tab.Navigator initialRouteName='Today'
+    <Tab.Navigator initialRouteName='Events'
     
     
     tabBar={(props) => <CustomTabBar {...props}/>}
@@ -78,8 +78,9 @@ export default function EventsDriveStack(props) {
       }}
     
     >
-        <Tab.Screen name='Drive' component={Drive} initialParams={{PickUpRef:props.PickUpRef}} />
+        
         <Tab.Screen name='Events' component={Events} />
+        <Tab.Screen name='Drive' component={Drive} initialParams={{PickUpRef:props.PickUpRef}} />
         {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
         {/* <Tab.Screen name='Others' component={Others} /> */}
     </Tab.Navigator>
