@@ -42,6 +42,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
               borderRadius: 10,
             }}
 
+            
           >
             <Text style={{ color: isFocused ? '#000' : '#666', fontWeight: '600' }}>
               {descriptors[route.key].options.title || route.name}
@@ -59,7 +60,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
 export default function EventsDriveStack(props) {
   
   return (
-    <Tab.Navigator initialRouteName='Events'
+    <Tab.Navigator initialRouteName='Drive'
     
     
     tabBar={(props) => <CustomTabBar {...props}/>}
@@ -79,8 +80,9 @@ export default function EventsDriveStack(props) {
     
     >
         
-        <Tab.Screen name='Events' component={Events} />
+        
         <Tab.Screen name='Drive' component={Drive} initialParams={{PickUpRef:props.PickUpRef}} />
+        <Tab.Screen name='Events' component={Events} />
         {/* <Tab.Screen name='22nd' component={NextTomorrow} /> */}
         {/* <Tab.Screen name='Others' component={Others} /> */}
     </Tab.Navigator>

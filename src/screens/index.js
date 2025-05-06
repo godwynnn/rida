@@ -293,7 +293,7 @@ export default IndexView
 
 styles = StyleSheet.create({
   container: {
-    backgroundColor: '#191C25',
+    backgroundColor: '#1D1A38',
     flex: 1,
     paddingTop: Platform.OS === 'android' ? '0' : '0',
     // justifyContent: 'space-between',

@@ -38,59 +38,62 @@ function Navigation() {
 
 
     const [ShowOnboarded, setShowOnboarded] = useState(null);
-    const [is_loggedIn, setisLoggedIn] = useState(false)
-
-
-
-    async function checkIfUserOnboarded() {
-        const onboarded = await getItem('onboarded');
-
-
-
-        if (onboarded == 1) {
-            setShowOnboarded(false);
-        } else {
-            setShowOnboarded(true);
-        }
-    }
-
+    const [is_loggedIn, setisLoggedIn] = useState(null)
 
     const checkIfUserIs_loggedIn = async () => {
         const logged_in = await getItem('logged_in');
-        console.log(logged_in)
         
 
         if (logged_in == 1) {
-           setTimeout(()=>{
-            setisLoggedIn(true)
-           },4000)
+           setisLoggedIn(true)
             
         } else {
             
             setisLoggedIn(false)
-         
             
         }
     }
 
 
-    console.warn('LOGGED IN ', is_loggedIn)
+    async function checkIfUserOnboarded() {
+        const onboarded = await getItem('onboarded');
+        console.warn('LOGGED IN ', onboarded)
 
 
-    useLayoutEffect(() => {
+        if (onboarded == 1) {
+
+            setTimeout(()=>{
+                setShowOnboarded(false);
+               },3000)
+            
+            
+        } else {
+            setTimeout(()=>{
+                setShowOnboarded(true);
+               },3000)
+            
+        }
+    }
+
+
+    
+
+    console.warn('LOGGED IN ', ShowOnboarded)
+
+
+    useEffect(() => {
         checkIfUserOnboarded();
         checkIfUserIs_loggedIn();
+        
     }, [])
 
 
+    
+    
+    
+    
 
-    
-    
     if (ShowOnboarded == null) {
-        return null
-    }
-
-    if (is_loggedIn == false) {
         return  (
             <SafeAreaView  style={{display:'flex',flex:1,justifyContent:'center',alignItems:'center',backgroundColor: '#ffffff',}}>
                 <LottieView 
@@ -100,7 +103,9 @@ function Navigation() {
 
             </SafeAreaView>
     )
+
     }
+
 
 
     if (ShowOnboarded) {

@@ -92,7 +92,7 @@ export default function Events() {
 
         <View style={{
           width: width, height: height / 10, display: 'flex',
-          flexDirection: 'row', gap:100, 
+          flexDirection: 'row', gap:120, 
         }}>
 
           <View >
@@ -100,10 +100,9 @@ export default function Events() {
             <Text style={tw` text-[13px]`}><Ionicons name={'location'} color={'#1D1A38'} /> Rumuola, Portharcourt</Text>
           </View>
 
-
           <Image 
           
-          style={{width:50,height:50, borderRadius:50}}
+          style={{width:40,height:40, borderRadius:50}}
           source={{uri:'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}}/>
 
         </View>
@@ -190,39 +189,6 @@ export default function Events() {
       <View style={{height:height/3.4,paddingVertical:4}} >
 
 
-<FlatList
-  data={Event_data}
-  style={{height:'100%',}}
-  contentContainerStyle={{gap:0}}
-  keyExtractor={(item, index)=>index}
-  horizontal
-  scrollEnabled
-  showsHorizontalScrollIndicator={false}
-  legacyImplementation={false}
-  
-  
-  renderItem={({item})=>{
-   return (
-   <TouchableOpacity style={[tw` bg-[whitesmoke] p-1  relative`,{borderRadius:10,  height:'100%', }]}>
-  <Image 
-  style={{width:'100%',height:'65%',borderRadius:10}} 
-  source={{uri:item.image}}
-  />
-    <CardTitle style={
-      [tw`text-[#1D1A38] p-2 text-[12px] font-bold`,
-      {width:'100%',  }
-    ]}
-    >{item.title}     <Text>5:00pm</Text></CardTitle>
-    <CardTitle style={
-      [tw`text-[#1D1A38] p-2 text-[12px] `,
-      {width:'100%',  }
-    ]}
-    >25 joined</CardTitle>
-   
-  
-      </TouchableOpacity>)
-  }}
-/>
 
 
 </View>
