@@ -18,10 +18,8 @@ export const CardNavigatorGroup=()=>{
 
     return(
         <tab.Navigator 
-        sceneContainerStyle={{backgroundColor:'whitesmoke',padding:10}}
-        screenOptions={{tabBarShowLabel:false,tabBarStyle:{
-            display:'none'
-        }}}
+        sceneContainerStyle={{backgroundColor:'white',padding:15, borderRadius:10}}
+        screenOptions={{tabBarShowLabel:false,swipeEnabled:false,tabBarStyle:{ display:'none'}}}
         initialRouteName='NairaAccount' >
 
             <tab.Screen  name='NairaAccount' component={NairaAccount}/>
@@ -123,7 +121,7 @@ function Walletcard(props) {
                     cardStyle,{display:'flex', justifyContent:'space-between'}]}>
                         <View style={[tw`p-1 px-4 flex flex-row justify-between items-center`,{width:'100%', height:'30%',borderRadius: 10}]}>
                             <Image source={{uri:props.card.Logo}} style={{width:42,height:'55%'}}/>
-                            <Ionicons name={'eye'} size={25} color={props.textColor} />
+                            <Ionicons name={'eye-off'} size={25} color={props.textColor} />
                         </View>
 
 
