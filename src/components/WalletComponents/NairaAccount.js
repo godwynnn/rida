@@ -4,8 +4,8 @@ import tailwind from 'twrnc'
 
 function NairaAccount() {
   return (
-    <View>
-        <Text>NairaAccount</Text>
+    <View style={{backgroundColor:'transparent'}}>
+        <Text style={{color:'black'}}>NairaAccount</Text>
         </View>
   )
 }
