@@ -58,6 +58,7 @@ function Wallet({ navigation }) {
                         />
 
 
+
                         <Walletcard
                               priority={firstPriority}
                               firstPriority={firstPriority}

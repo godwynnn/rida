@@ -18,9 +18,9 @@ export const CardNavigatorGroup=()=>{
 
     return(
         <tab.Navigator 
-        sceneContainerStyle={{backgroundColor:'white',padding:15, borderRadius:10}}
+        sceneContainerStyle={{backgroundColor:'white',padding:10, borderRadius:10}}
         screenOptions={{tabBarShowLabel:false,swipeEnabled:false,tabBarStyle:{ display:'none'}}}
-        initialRouteName='NairaAccount' >
+        initialRouteName='DollarAccount' >
 
             <tab.Screen  name='NairaAccount' component={NairaAccount}/>
             <tab.Screen  name='DollarAccount' component={DollarAccount}/>
